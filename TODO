@@ -1,0 +1,4 @@
+edo:
+----	replace makefile with cmake autogen
+----	start working on the data structure for storing data
+----	start working on the searching algorithms
