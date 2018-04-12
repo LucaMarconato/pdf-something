@@ -1,0 +1,12 @@
+#+edo
+* TODO replace makefile with cmake autogen
+* TODO start working on the data structure for storing data
+* TODO start working on the searching algorithms
+
+#+luca
+* TODO work on representing the handwriting with splines
+* TODO work on the affine transformations needed for the pdf crop and zoom
+* TODO setup the testing units
+
+#+future
+* TODO implement the algorithm for determining which points are inside a closed curve (depends on the data structure we will use)
