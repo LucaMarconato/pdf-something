@@ -1,0 +1,11 @@
+Luca:
+-Spline
+-Selection
+-Affine trasformation for pdf visualization
+-testing units
+
+
+
+Edoardo:
+-File*
+-Finding text (is there a library for finding in pdf?)*
