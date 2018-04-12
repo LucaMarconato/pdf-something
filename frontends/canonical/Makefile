@@ -1,4 +1,4 @@
-CC = g++
+CC = clang++
 FLAGS = -g -std=c++14 -Wall -O0 # debug
 # FLAGS = -std=c++14 -Ofast # release
 
