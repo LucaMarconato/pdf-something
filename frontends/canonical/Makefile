@@ -9,15 +9,18 @@ OBJS = $(SRCS:.cpp=.o)
 OUT = canonical-frontend
 
 $(OUT): $(OBJS)
-	$(CC) $(FLAGS) -o $(OUT) $(OBJS) $(INCLUDES) $(LIBS) -lbackend
+	$(CC) $(FLAGS) $(OBJS) -o $(OUT) $(INCLUDES) $(LIBS) -lbackend 
 
-$(OBJS): $(SRCS) Makefile
-	$(CC) $(SCRS) $(FLAGS) -c $< -o $@ $(INCLUDES)
+%.o: %.cpp Makefile ../../backend/libbackend.a
+	$(CC) $(FLAGS) -c $< -o $@ $(INCLUDES)
 
 .PHONY: clean run
 
 clean:
 	rm -rf $(OUT) *.o
+
+#build and run are used in my emacs configuration
+build: $(OUT)
 
 run:
 	./$(OUT)
