@@ -1,0 +1,10 @@
+/home/edoardo/pdf-something/CMakeFiles/edit_cache.dir
+/home/edoardo/pdf-something/CMakeFiles/rebuild_cache.dir
+/home/edoardo/pdf-something/backend/CMakeFiles/edit_cache.dir
+/home/edoardo/pdf-something/backend/CMakeFiles/rebuild_cache.dir
+/home/edoardo/pdf-something/backend/CMakeFiles/libbackend.dir
+/home/edoardo/pdf-something/frontends/CMakeFiles/edit_cache.dir
+/home/edoardo/pdf-something/frontends/CMakeFiles/rebuild_cache.dir
+/home/edoardo/pdf-something/frontends/canonical/CMakeFiles/edit_cache.dir
+/home/edoardo/pdf-something/frontends/canonical/CMakeFiles/rebuild_cache.dir
+/home/edoardo/pdf-something/frontends/canonical/CMakeFiles/canonical-frontend.dir

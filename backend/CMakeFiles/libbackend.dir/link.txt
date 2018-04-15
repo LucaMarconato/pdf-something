@@ -1,0 +1,2 @@
+/usr/bin/ar qc liblibbackend.a  CMakeFiles/libbackend.dir/history.cpp.o
+/usr/bin/ranlib liblibbackend.a

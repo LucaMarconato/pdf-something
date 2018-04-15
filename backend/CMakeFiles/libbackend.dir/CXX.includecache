@@ -1,0 +1,16 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/edoardo/pdf-something/backend/history.cpp
+history.hpp
+/home/edoardo/pdf-something/backend/history.hpp
+
+/home/edoardo/pdf-something/backend/history.hpp
+string
+-
+

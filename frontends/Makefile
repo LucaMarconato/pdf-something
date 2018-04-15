@@ -80,14 +80,14 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	cd /home/edoardo/pdf-something && $(CMAKE_COMMAND) -E cmake_progress_start /home/edoardo/pdf-something/CMakeFiles /home/edoardo/pdf-something/frontends/canonical/CMakeFiles/progress.marks
-	cd /home/edoardo/pdf-something && $(MAKE) -f CMakeFiles/Makefile2 frontends/canonical/all
+	cd /home/edoardo/pdf-something && $(CMAKE_COMMAND) -E cmake_progress_start /home/edoardo/pdf-something/CMakeFiles /home/edoardo/pdf-something/frontends/CMakeFiles/progress.marks
+	cd /home/edoardo/pdf-something && $(MAKE) -f CMakeFiles/Makefile2 frontends/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/edoardo/pdf-something/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
 clean:
-	cd /home/edoardo/pdf-something && $(MAKE) -f CMakeFiles/Makefile2 frontends/canonical/clean
+	cd /home/edoardo/pdf-something && $(MAKE) -f CMakeFiles/Makefile2 frontends/clean
 .PHONY : clean
 
 # The main clean target
@@ -97,60 +97,18 @@ clean/fast: clean
 
 # Prepare targets for installation.
 preinstall: all
-	cd /home/edoardo/pdf-something && $(MAKE) -f CMakeFiles/Makefile2 frontends/canonical/preinstall
+	cd /home/edoardo/pdf-something && $(MAKE) -f CMakeFiles/Makefile2 frontends/preinstall
 .PHONY : preinstall
 
 # Prepare targets for installation.
 preinstall/fast:
-	cd /home/edoardo/pdf-something && $(MAKE) -f CMakeFiles/Makefile2 frontends/canonical/preinstall
+	cd /home/edoardo/pdf-something && $(MAKE) -f CMakeFiles/Makefile2 frontends/preinstall
 .PHONY : preinstall/fast
 
 # clear depends
 depend:
 	cd /home/edoardo/pdf-something && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
 .PHONY : depend
-
-# Convenience name for target.
-frontends/canonical/CMakeFiles/canonical-frontend.dir/rule:
-	cd /home/edoardo/pdf-something && $(MAKE) -f CMakeFiles/Makefile2 frontends/canonical/CMakeFiles/canonical-frontend.dir/rule
-.PHONY : frontends/canonical/CMakeFiles/canonical-frontend.dir/rule
-
-# Convenience name for target.
-canonical-frontend: frontends/canonical/CMakeFiles/canonical-frontend.dir/rule
-
-.PHONY : canonical-frontend
-
-# fast build rule for target.
-canonical-frontend/fast:
-	cd /home/edoardo/pdf-something && $(MAKE) -f frontends/canonical/CMakeFiles/canonical-frontend.dir/build.make frontends/canonical/CMakeFiles/canonical-frontend.dir/build
-.PHONY : canonical-frontend/fast
-
-main.o: main.cpp.o
-
-.PHONY : main.o
-
-# target to build an object file
-main.cpp.o:
-	cd /home/edoardo/pdf-something && $(MAKE) -f frontends/canonical/CMakeFiles/canonical-frontend.dir/build.make frontends/canonical/CMakeFiles/canonical-frontend.dir/main.cpp.o
-.PHONY : main.cpp.o
-
-main.i: main.cpp.i
-
-.PHONY : main.i
-
-# target to preprocess a source file
-main.cpp.i:
-	cd /home/edoardo/pdf-something && $(MAKE) -f frontends/canonical/CMakeFiles/canonical-frontend.dir/build.make frontends/canonical/CMakeFiles/canonical-frontend.dir/main.cpp.i
-.PHONY : main.cpp.i
-
-main.s: main.cpp.s
-
-.PHONY : main.s
-
-# target to generate assembly for a file
-main.cpp.s:
-	cd /home/edoardo/pdf-something && $(MAKE) -f frontends/canonical/CMakeFiles/canonical-frontend.dir/build.make frontends/canonical/CMakeFiles/canonical-frontend.dir/main.cpp.s
-.PHONY : main.cpp.s
 
 # Help Target
 help:
@@ -160,10 +118,6 @@ help:
 	@echo "... depend"
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
-	@echo "... canonical-frontend"
-	@echo "... main.o"
-	@echo "... main.i"
-	@echo "... main.s"
 .PHONY : help
 
 
