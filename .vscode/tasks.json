@@ -6,13 +6,13 @@
         {
             "label": "backend-makefile",
             "type": "shell",
-            "command": "make",
+            "command": "cmake . && make",
             "group": {
                 "kind": "build",
                 "isDefault": true
             },
             "options": {
-                "cwd": "${workspaceFolder}/frontends/canonical"
+                "cwd": "${workspaceFolder}"
             },
         }
     ]

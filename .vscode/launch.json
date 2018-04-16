@@ -17,5 +17,5 @@
             "MIMode": "lldb"
         }
     ],
-//    "console": "integratedTerminal",
+    "console": "integratedTerminal",
 }
