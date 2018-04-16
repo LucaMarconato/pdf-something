@@ -28,5 +28,7 @@ extern "C" void freeString(char * string) {
 
 extern "C" char * getLastOpenedFile()
 {
-    return std_string_to_c_string(get_last_opened_file().c_str());
+//    return std_string_to_c_string(get_last_opened_file().c_str());
+    std::string s = "test";
+    return std_string_to_c_string(s);
 }
