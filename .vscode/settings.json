@@ -1,0 +1,7 @@
+{
+    "files.associations": {
+        "list": "cpp"
+    },
+    "editor.wordWrap": "on",
+    "workbench.editor.showTabs": false
+}

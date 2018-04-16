@@ -1,4 +1,10 @@
-/backend/*.o
-/backend/*.a
-/frontends/canonical/*.o
-/frontends/canonical/canonical-frontend
+backend/liblibbackend.a
+*.o
+*.a
+    
+Makefile
+CMakeCache.txt
+cmake_install.cmake
+CMakeFiles
+frontends/canonical/canonical-frontend
+.DS_Store
