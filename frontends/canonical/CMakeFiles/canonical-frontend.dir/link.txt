@@ -1,1 +1,0 @@
-/usr/bin/c++      CMakeFiles/canonical-frontend.dir/main.cpp.o  -o canonical-frontend -rdynamic ../../backend/liblibbackend.a 
