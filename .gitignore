@@ -1,0 +1,4 @@
+/backend/*.o
+/backend/*.a
+/frontends/canonical/*.o
+/frontends/canonical/canonical-frontend
