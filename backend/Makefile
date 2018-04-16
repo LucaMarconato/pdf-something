@@ -1,6 +1,5 @@
-CC = g++
-FLAGS = -g -std=c++14 -Wall -Wextra -O0 #debug
-# FLAGS = -std=c++14 -Ofast # release
+CC = clang++
+FLAGS = -g -std=c++17 -Wall -Wextra -O0 #debug
 
 SRCS = $(wildcard *.cpp)
 # INCLUDES = -I/usr/local/Cellar/boost/1.66.0/include/
@@ -19,7 +18,9 @@ $(OUT): $(OBJS)
 # %.o: %.cpp Makefile clean
 # 	$(CC) $(FLAGS) -c $< -o $@ -arch x86_64 -arch i386
 
-.PHONY: clean
+.PHONY: clean all
 
 clean: 
 	rm -rf $(OUT).a *.o
+
+all: $(OUT)
