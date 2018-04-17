@@ -10,6 +10,13 @@
 Uuid::Uuid()
 {
     this->uuid_string = Uuid::generate_uuids(1).front();
+    this->empty_uuid = false;
+}
+
+Uuid::Uuid(std::string uuid_string)
+{
+    this->uuid_string = uuid_string;
+    this->empty_uuid = false;
 }
 
 std::vector<std::string> Uuid::generate_uuids(int count)
@@ -27,6 +34,11 @@ std::vector<std::string> Uuid::generate_uuids(int count)
 bool Uuid::operator==(const Uuid & u) const
 {
     return this->uuid_string == u.uuid_string;
+}
+
+bool operator<(Uuid const & lhs, Uuid const & rhs)
+{
+    return lhs.uuid_string < rhs.uuid_string;
 }
 
 std::ostream & operator<<(std::ostream & stream, const Uuid & obj)
