@@ -1,0 +1,109 @@
+{
+    "format": "pdf",
+    "uuid": "84f3415d-4f59-4333-9f8b-b4f9f1e9a5fb",
+    "name": "Complex Geometry",
+    "in_program_directory": "/geometry/",
+    "latest_opening": "2018-04-17 15:27:50",
+    "pages":
+    [
+        {
+            "uuid": "8eb0633c-b4b9-4dc0-9206-fd2e41628895",
+            "highlightings":
+            [
+                "707cb4c4-b410-4bbf-8b8a-891b52b9a6c3",
+                "64a05ad2-caa0-41a1-9b3c-a6b31bd6eba0",
+                "53b0c38c-9be5-4fcc-b33d-b8045790bd77"
+            ]
+        },
+        {
+            "uuid": "d623d107-2192-4143-8643-384000aa9dd7",
+            "highlightings":
+            [
+                "1c6ea691-3cb8-43d2-b1ae-6a0baadccbd4"
+            ]
+        }
+    ],
+    "highlightings_components":
+    [
+        {
+            "5cd72254-0cef-4662-84ac-9278e451824d":
+            {
+                "highlighting": "707cb4c4-b410-4bbf-8b8a-891b52b9a6c3",
+                "x0": 0.2,
+                "y0": 0.3,
+                "x1": 0.1,
+                "y1": 0.1
+            }
+        },
+        {
+            "715297a0-d966-4a89-b3c8-2b2131673ca1":
+            {
+                "highlighting": "707cb4c4-b410-4bbf-8b8a-891b52b9a6c3",
+                "x0": 0.4,
+                "y0": 0.2,
+                "x1": 0.04,
+                "y1": 0.1
+            }
+        },
+        {
+            "01ee905b-6a36-44f4-8730-ba0335913212":
+            {
+                "highlighting": "64a05ad2-caa0-41a1-9b3c-a6b31bd6eba0",
+                "x0": 0.2,
+                "y0": 0.3,
+                "x1": 0.1,
+                "y1": 0.1
+            }
+        },
+        {
+            "76faf0e9-a631-4c03-aa7c-d6475f71737d":
+            {
+                "highlighting": "64a05ad2-caa0-41a1-9b3c-a6b31bd6eba0",
+                "x0": 0.4,
+                "y0": 0.2,
+                "x1": 0.04,
+                "y1": 0.1
+            }
+        },
+        {
+            "7b45c26c-251d-4b39-bfb1-d6e040b49d37":
+            {
+                "highlighting": "53b0c38c-9be5-4fcc-b33d-b8045790bd77",
+                "x0": 0.7,
+                "y0": 0.3,
+                "x1": 0.1,
+                "y1": 0.6
+            }
+        },
+        {
+            "857f6246-d758-49ec-b86d-147d2a77a7f0":
+            {
+                "highlighting": "53b0c38c-9be5-4fcc-b33d-b8045790bd77",
+                "x0": 0.8,
+                "y0": 0.3,
+                "x1": 0.04,
+                "y1": 0.1
+            }
+        },
+        {
+            "88b3a3bf-62fb-4e2d-a450-471b722bedcc":
+            {
+                "highlighting": "1c6ea691-3cb8-43d2-b1ae-6a0baadccbd4",
+                "x0": 0.6,
+                "y0": 0.3,
+                "x1": 0.1,
+                "y1": 0.6
+            }
+        },
+        {
+            "92a850ed-f8e1-4453-aff7-1eec90cea2ce":
+            {
+                "highlighting": "1c6ea691-3cb8-43d2-b1ae-6a0baadccbd4",
+                "x0": 0.6,
+                "y0": 0.3,
+                "x1": 0.04,
+                "y1": 0.1
+            }
+        }
+    ]
+}

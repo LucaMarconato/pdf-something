@@ -5,8 +5,9 @@
 #include <iostream>
 
 Datetime::Datetime(std::string datetime)
-{    
-    std::cout << "TODO: parse datetime \"" << datetime << "\" string\n";
+{
+    //the format is "yyyy-mm-dd hh:mm:ss"
+    std::cout << "TODO: parse datetime from string \"" << datetime << "\" to std::time_t\n";
 }
 
 Datetime::Datetime()

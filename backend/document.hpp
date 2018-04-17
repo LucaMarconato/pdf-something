@@ -2,6 +2,7 @@
 #define DOCUMENT_H
 
 #include <string>
+#include <memory>
 
 #include "datetime.hpp"
 #include "uuid.hpp"
@@ -12,15 +13,18 @@
 */
 class Document
 {
-public:    
+public:
+    static std::shared_ptr<Document> parse_document(char * file_content);
+    std::string serialize_to_json();    
     friend std::ostream & operator<<(std::ostream & stream, const Document & obj);
-private:
-    //this path is used to create a directory tree inside the program, for organizing the various documents
-    std::string in_program_path;
-    Datetime latest_opening;
-    Uuid uuid;
+    virtual ~Document();
 protected:
     bool initialized = false;
+    Uuid uuid;
+    //this path is used to create a directory tree inside the program, for organizing the various documents
+    std::string in_program_directory;
+    std::string name;
+    Datetime latest_opening;
 };
 
 std::ostream & operator<<(std::ostream & stream, const Document & obj);

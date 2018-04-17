@@ -28,52 +28,58 @@ int main(int argc, char * argv[])
       This because otherwise the user could get confused
     */
 
-    //here I show some classes as an example.
-    Uuid uuid;
-    std::cout << uuid << "\n\n";
-
-    Color my_color = Color::orange();
-    std::cout << my_color << "\n\n";
-
-    Datetime datetime = Datetime::now();
-    std::cout << datetime << "\n\n";
-
-    Document document;
-    std::cout << document << "\n\n";
-
-    Highlighting highlighting(document);
-    std::cout << highlighting << "\n\n";
-
-    Pdf_document pdf_document;
-    std::cout << pdf_document << "\n\n";
-
-    Pdf_page pdf_page(pdf_document);
-    std::cout << pdf_page << "\n\n";
+    Uuid latest_opened_pdf_uuid = Mediator::get_latest_opened_pdf();
+    std::cout << "latest_opened_pdf_uuid = " << latest_opened_pdf_uuid << "\n\n";
     
-    Highlighting_component highlighting_component(highlighting,pdf_page,0.5,0.5,0.6,0.6);
-    std::cout << highlighting_component << "\n\n";
-
-    Virtual_screen virtual_screen;
-    std::cout << virtual_screen << "\n\n";
+    Document & latest_opened_pdf = Mediator::document_for_uuid(latest_opened_pdf_uuid);
+    std::cout << "latest_opened_pdf = " << latest_opened_pdf << "\n\n";
     
-    Monitor monitor;
-    std::cout << monitor << "\n\n";
+    // //here I show some classes as an example.
+    // Uuid uuid;
+    // std::cout << uuid << "\n\n";
 
-    Window window(0,0,1200,800);
-    window.virtual_screen = &virtual_screen;
-    window.monitor = &monitor;
-    std::cout << window << "\n\n";
+    // Color my_color = Color::orange();
+    // std::cout << my_color << "\n\n";
 
-    Window_layout window_layout;
-    unsigned int rows = 2, columns = 3;
-    window_layout.set_layout(rows,columns);
-    std::tie(rows, columns) = window_layout.size();
-    for(unsigned int i = 0; i < rows; i++) {
-        for(unsigned int j = 0; j < columns; j++) {
-            Window_layout_element e(&document);
-            window_layout.set_layout_element(e,i,j);
-        }
-    }
-    std::cout << window_layout << "\n\n";
+    // Datetime datetime = Datetime::now();
+    // std::cout << datetime << "\n\n";
+
+    // Document document;
+    // std::cout << document << "\n\n";
+
+    // Highlighting highlighting(document);
+    // std::cout << highlighting << "\n\n";
+
+    // Pdf_document pdf_document;
+    // std::cout << pdf_document << "\n\n";
+
+    // Pdf_page pdf_page(pdf_document);
+    // std::cout << pdf_page << "\n\n";
+    
+    // Highlighting_component highlighting_component(highlighting,pdf_page,0.5,0.5,0.6,0.6);
+    // std::cout << highlighting_component << "\n\n";
+
+    // Virtual_screen virtual_screen;
+    // std::cout << virtual_screen << "\n\n";
+    
+    // Monitor monitor;
+    // std::cout << monitor << "\n\n";
+
+    // Window window(0,0,1200,800);
+    // window.virtual_screen = &virtual_screen;
+    // window.monitor = &monitor;
+    // std::cout << window << "\n\n";
+
+    // Window_layout window_layout;
+    // unsigned int rows = 2, columns = 3;
+    // window_layout.set_layout(rows,columns);
+    // std::tie(rows, columns) = window_layout.size();
+    // for(unsigned int i = 0; i < rows; i++) {
+    //     for(unsigned int j = 0; j < columns; j++) {
+    //         Window_layout_element e(&document);
+    //         window_layout.set_layout_element(e,i,j);
+    //     }
+    // }
+    // std::cout << window_layout << "\n\n";
     return 0;
 }

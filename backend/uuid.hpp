@@ -11,9 +11,17 @@ class Uuid
 {
 public:
     Uuid();
+    Uuid(std::string uuid_string);
     bool operator==(const Uuid & u) const;
+    //for using an Uuid as a key in an std::map
+    friend bool operator<(Uuid const & lhs, Uuid const & rhs);
     //here I am using a string for representing an uuid, but we will need to use the byte representation
-    std::string uuid_string;
+    std::string uuid_string = "";
+
+    /*
+      Sometime we will need to ask the uuid of an object (for instance when asking the backend which was the latest opened pdf). This flag will let us determine if such object is not available (in the example above, when the applicaiton opens for the first time and so there is no pdf to be reopened, this flag will be true)
+    */
+    bool empty_uuid = true;
 
 private:    
     //if one needs to create more than one uuid, it is faster to use only one boost::uuids::random_generator, so I am passing the count argument and return a vector of uuids, represented as strings.

@@ -10,4 +10,10 @@
 #include "document.hpp"
 #include "window.hpp"
 
+#include "database/database.hpp"
+#include "database/mediator.hpp"
+#include "database/resources_manager.hpp"
+
+#include "io/file.hpp"
+
 #endif //BACKEND_H
