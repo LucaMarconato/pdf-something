@@ -4,6 +4,7 @@
 #include "image_document.hpp"
 #include "highlighting.hpp"
 #include "pdf_document.hpp"
+#include "pdf_page.hpp"
 #include "color.hpp"
 #include "uuid.hpp"
 #include "window_layout.hpp"

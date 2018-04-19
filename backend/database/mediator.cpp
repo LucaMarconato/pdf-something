@@ -1,15 +1,17 @@
 #include "mediator.hpp"
 
+#include "../io/file.hpp"
+
 #include <iostream>
 
 Uuid Mediator::get_latest_opened_pdf()
 {
     return Uuid(Database::latest_opened_pdf);
 }
-std::shared_ptr<Document> Mediator::document_for_uuid(Uuid const & uuid)
+Document * Mediator::document_for_uuid(Uuid const & uuid)
 {
     //to make the code more readable
-    std::map<Uuid, std::shared_ptr<Document>> loaded = Resources_manager::loaded_documents;
+    std::map<Uuid, Document *> loaded = Resources_manager::loaded_documents;
     
     auto e = loaded.find(uuid);
     if(e == loaded.end()) {
@@ -20,11 +22,13 @@ std::shared_ptr<Document> Mediator::document_for_uuid(Uuid const & uuid)
             std::cerr << "error: unable to locate the document uuid = " << uuid << "\n";
             exit(1);
         } else {
-            file.read_all_content(true);
+            char * buffer = nullptr;
+            file.read_all_content(true,&buffer);
             // std::cout << "read " << file.size()/1024 << " KBs\n";
-            auto document = Document::parse_document(file.content);
-            Resources_manager::loaded_documents[uuid] = document; 
+            auto document = Document::parse_document(buffer);
+            Resources_manager::loaded_documents[uuid] = document;
             file.close();
+            delete [] buffer;
             return document;
         }
     } else {
@@ -32,53 +36,97 @@ std::shared_ptr<Document> Mediator::document_for_uuid(Uuid const & uuid)
     }    
 }
 
-std::shared_ptr<Pdf_page> Mediator::pdf_page_for_uuid(Uuid const & uuid, std::shared_ptr<Pdf_document> in_document)
+Pdf_page * Mediator::pdf_page_for_uuid(Uuid const & uuid, Pdf_document * in_document)
 {
     //to make the code more readable
-    std::map<Uuid, std::shared_ptr<Pdf_page>> loaded = Resources_manager::loaded_pdf_pages;
+    std::map<Uuid, Pdf_page *> loaded = Resources_manager::loaded_pdf_pages;
     
     auto e = loaded.find(uuid);
     if(e == loaded.end()) {
-        std::shared_ptr<Pdf_page> pdf_page = std::make_shared<Pdf_page>(Pdf_page(in_document));
+        Pdf_page * pdf_page = new Pdf_page(in_document);
         pdf_page->uuid = uuid;
         Resources_manager::loaded_pdf_pages.insert(std::make_pair(uuid,pdf_page));
-        // Resources_manager::loaded_pdf_pages.insert(std::make_pair(uuid,*(pdf_page.get())));
-        // Resources_manager::loaded_pdf_pages[uuid] = *(pdf_page.get());
-        return Resources_manager::loaded_pdf_pages[uuid];
+        return pdf_page;
     } else {
         //integrity check
-        if(e->second.get()->in_document != in_document) {
-            std::cerr << "error: *(e->second.get())->in_document = " << *(e->second.get())->in_document << ", in_document = " << in_document << "\n";
+        if(e->second->in_document != in_document) {
+            std::cerr << "error: e->second->in_document = " << e->second->in_document << ", in_document = " << in_document << "\n";
             exit(1);
         }
         return e->second;
     }
 }
 
-std::shared_ptr<Highlighting> Mediator::highlighting_for_uuid(Uuid const & uuid)
+Highlighting * Mediator::highlighting_for_uuid(Uuid const & uuid, Document * in_document)
 {
     //to make the code more readable
-    std::map<Uuid, std::shared_ptr<Highlighting>> loaded = Resources_manager::loaded_highlightings;
+    std::map<Uuid, Highlighting *> loaded = Resources_manager::loaded_highlightings;
     
     auto e = loaded.find(uuid);
     if(e == loaded.end()) {
-        std::cerr << "WARNING: The highlighting is not loaded in memory, look in the big database\n";
-        exit(1);
+        Highlighting * highlighting = new Highlighting(in_document);
+        highlighting->uuid = uuid;
+        Resources_manager::loaded_highlightings.insert(std::make_pair(uuid,highlighting));
+        return highlighting;
     } else {
+        //integrity check
+        if(e->second->in_document != in_document) {
+            std::cerr << "error: e->second->in_document = " << e->second->in_document << ", in_document = " << in_document << "\n";
+            exit(1);
+        }
         return e->second;
     }    
 }
 
-std::shared_ptr<Highlighting_component> Mediator::highlighting_component_for_uuid(Uuid const & uuid)
+Highlighting_component * Mediator::highlighting_component_for_uuid(Uuid const & uuid)
 {
     //to make the code more readable
-    std::map<Uuid, std::shared_ptr<Highlighting_component>> loaded = Resources_manager::loaded_highlighting_components;
+    std::map<Uuid, Highlighting_component *> loaded = Resources_manager::loaded_highlighting_components;
     
     auto e = loaded.find(uuid);
     if(e == loaded.end()) {
-        std::cerr << "WARNING: The highlighting component is not loaded in memory, look in the big database\n";
-        exit(1);
+        Highlighting_component * highlighting_component = new Highlighting_component();
+        highlighting_component->uuid = uuid;
+        Resources_manager::loaded_highlighting_components.insert(std::make_pair(uuid,highlighting_component));
+        return highlighting_component;
     } else {
         return e->second;
+    }
+}
+
+bool Mediator::document_is_loaded(Uuid uuid)
+{
+    auto e = Resources_manager::loaded_documents.find(uuid);
+    if(e == Resources_manager::loaded_documents.end()) {
+        return false;
+    } else {
+        return true;
+    }
+}
+bool Mediator::pdf_page_is_loaded(Uuid uuid)
+{
+    auto e = Resources_manager::loaded_pdf_pages.find(uuid);
+    if(e == Resources_manager::loaded_pdf_pages.end()) {
+        return false;
+    } else {
+        return true;
+    }
+}
+bool Mediator::highlighting_is_loaded(Uuid uuid)
+{
+    auto e = Resources_manager::loaded_highlightings.find(uuid);
+    if(e == Resources_manager::loaded_highlightings.end()) {
+        return false;
+    } else {
+        return true;
+    }
+}
+bool Mediator::highlighting_component_is_loaded(Uuid uuid)
+{
+    auto e = Resources_manager::loaded_highlighting_components.find(uuid);
+    if(e == Resources_manager::loaded_highlighting_components.end()) {
+        return false;
+    } else {
+        return true;
     }
 }

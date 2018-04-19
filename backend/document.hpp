@@ -2,7 +2,6 @@
 #define DOCUMENT_H
 
 #include <string>
-#include <memory>
 
 #include <nlohmann/json.hpp>
 
@@ -18,7 +17,7 @@ using json = nlohmann::json;
 */
 class Document {
 public:
-    static std::shared_ptr<Document> parse_document(char * file_content);
+    static Document * parse_document(char * file_content);
     virtual std::string serialize_to_json();    
     friend std::ostream & operator<<(std::ostream & stream, const Document & obj);
     //polymorphic method called by the operator<<
