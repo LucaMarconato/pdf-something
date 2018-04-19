@@ -10,3 +10,4 @@
 
 #+future
 * TODO implement the algorithm for determining which points are inside a closed curve (depends on the data structure we will use)
+  

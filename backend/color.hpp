@@ -10,6 +10,7 @@ public:
     Color(double r, double g, double b);
     Color();
     void rgb(double r, double g, double b);
+    bool is_valid() const;
     
     static Color black()    { return(Color(1,1,1)); }
     static Color white()    { return(Color(0,0,0)); }
@@ -24,10 +25,7 @@ public:
     friend std::ostream & operator<< (std::ostream & stream, const Color & obj);
 
     //values in [0,1]
-    double r, g, b;
-    
-private: 
-    bool initialized = false;
+    double r = -1, g = -1, b = -1;
 };
 
 std::ostream & operator<< (std::ostream & stream, const Color & obj);

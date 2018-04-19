@@ -12,7 +12,9 @@ class Uuid
 public:
     Uuid();
     Uuid(std::string uuid_string);
+    bool is_valid() const;
     bool operator==(const Uuid & u) const;
+    bool operator!=(const Uuid & u) const;
     //for using an Uuid as a key in an std::map
     friend bool operator<(Uuid const & lhs, Uuid const & rhs);
     //here I am using a string for representing an uuid, but we will need to use the byte representation

@@ -1,5 +1,7 @@
 #include <iostream>
 #include <string>
+#include <memory>
+
 #include <backend.hpp>
 
 int main(int argc, char * argv[])
@@ -29,10 +31,9 @@ int main(int argc, char * argv[])
     */
 
     Uuid latest_opened_pdf_uuid = Mediator::get_latest_opened_pdf();
-    std::cout << "latest_opened_pdf_uuid = " << latest_opened_pdf_uuid << "\n\n";
-    
-    Document & latest_opened_pdf = Mediator::document_for_uuid(latest_opened_pdf_uuid);
-    std::cout << "latest_opened_pdf = " << latest_opened_pdf << "\n\n";
+    std::shared_ptr<Document> latest_opened_pdf = Mediator::document_for_uuid(latest_opened_pdf_uuid);
+    std::cout << "latest_opened_pdf.get() = " << latest_opened_pdf.get() << "\n";
+    std::cout << "latest_opened_pdf = " << *(latest_opened_pdf.get()) << "\n\n";
     
     // //here I show some classes as an example.
     // Uuid uuid;

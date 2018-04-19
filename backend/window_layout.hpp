@@ -4,6 +4,7 @@
 #include <string>
 #include <vector>
 #include <tuple>
+#include <memory>
 
 #include "document.hpp"
 
@@ -16,14 +17,12 @@ class Window_layout_element
 public:
     Window_layout_element();
     Window_layout_element(const Window_layout_element & element);
-    Window_layout_element(Document * document);
+    Window_layout_element(std::shared_ptr<Document> document);
+    friend void swap(Window_layout_element & obj1, Window_layout_element & obj2);
     Window_layout_element & operator=(Window_layout_element & obj);
     friend std::ostream & operator<<(std::ostream & stream, const Window_layout_element & obj);    
 private:
-
-    //here we use a pointer because the same document can be displayed in various layout element (and even in different windows)
-    //I am using a pointer instead of a reference because its value can change once already assigned
-    Document * document = nullptr;
+    std::shared_ptr<Document> document;
 };
 std::ostream & operator<<(std::ostream & stream, const Window_layout_element & obj);
 
