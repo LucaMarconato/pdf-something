@@ -1,6 +1,5 @@
 #include <iostream>
 #include <string>
-#include <memory>
 
 #include <backend.hpp>
 
@@ -31,34 +30,9 @@ int main(int argc, char * argv[])
     */
 
     Uuid latest_opened_pdf_uuid = Mediator::get_latest_opened_pdf();
-    std::shared_ptr<Document> latest_opened_pdf = Mediator::document_for_uuid(latest_opened_pdf_uuid);
-    std::cout << "latest_opened_pdf.get() = " << latest_opened_pdf.get() << "\n";
-    std::cout << "latest_opened_pdf = " << *(latest_opened_pdf.get()) << "\n\n";
-    
-    // //here I show some classes as an example.
-    // Uuid uuid;
-    // std::cout << uuid << "\n\n";
-
-    // Color my_color = Color::orange();
-    // std::cout << my_color << "\n\n";
-
-    // Datetime datetime = Datetime::now();
-    // std::cout << datetime << "\n\n";
-
-    // Document document;
-    // std::cout << document << "\n\n";
-
-    // Highlighting highlighting(document);
-    // std::cout << highlighting << "\n\n";
-
-    // Pdf_document pdf_document;
-    // std::cout << pdf_document << "\n\n";
-
-    // Pdf_page pdf_page(pdf_document);
-    // std::cout << pdf_page << "\n\n";
-    
-    // Highlighting_component highlighting_component(highlighting,pdf_page,0.5,0.5,0.6,0.6);
-    // std::cout << highlighting_component << "\n\n";
+    Document * latest_opened_pdf = Mediator::document_for_uuid(latest_opened_pdf_uuid);
+    std::cout << "latest_opened_pdf = " << latest_opened_pdf << "<BR>";
+    std::cout << "*latest_opened_pdf:<blockquote>" << *latest_opened_pdf << "</blockquote>";    
 
     // Virtual_screen virtual_screen;
     // std::cout << virtual_screen << "\n\n";

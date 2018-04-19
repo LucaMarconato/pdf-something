@@ -7,8 +7,8 @@
 class Color
 {
 public:
-    Color(double r, double g, double b);
     Color();
+    Color(double r, double g, double b);
     void rgb(double r, double g, double b);
     bool is_valid() const;
     
@@ -21,6 +21,7 @@ public:
     static Color orange()   { return(Color(0.9,0.45,0)); }
     static Color brown()    { return(Color(0.31,0.21,0.09)); }
     static Color purple()   { return(Color(1,0.15,1)); }
+    static Color from_string(std::string color);
     
     friend std::ostream & operator<< (std::ostream & stream, const Color & obj);
 

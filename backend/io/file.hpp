@@ -27,11 +27,10 @@ public:
     unsigned long long size();
     //we are not returing the content but we are storing it in this class so we are sure that its memory is freed correctly when the destructor is called
     //this prevents memory leak but we have to be careful to not have the destructor of File called to early
-    void read_all_content(bool append_null);
+    void read_all_content(bool append_null, char ** buffer);
     void write(char * to_write, int bytes);
     void write(std::string to_write);
 
-    char * content = nullptr;
     bool is_open = false;
 private:
     Opening_mode opening_mode;

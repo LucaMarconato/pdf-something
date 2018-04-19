@@ -8,7 +8,7 @@ Datetime::Datetime(std::string datetime)
 {
     //the format is "yyyy-mm-dd hh:mm:ss"
     struct std::tm tm;
-    std::istringstream ss("16:35:12");
+    std::istringstream ss(datetime);
     ss >> std::get_time(&tm, "%F %T");
     this->time = mktime(&tm);
     //TODO: check if the conversion was successful before claiming that this object is initalized

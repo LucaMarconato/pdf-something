@@ -12,6 +12,31 @@ Color::Color(double r, double g, double b)
     this->rgb(r,g,b);
 }
 
+Color Color::from_string(std::string color)
+{
+    if(color == "black") {
+        return Color::black();
+    } else if(color == "white") {
+        return Color::white();
+    } else if(color == "red") {
+        return Color::red();
+    } else if(color == "yellow") {
+        return Color::yellow();
+    } else if(color == "green") {
+        return Color::green();
+    } else if(color == "blue") {
+        return Color::blue();
+    } else if(color == "orange") {
+        return Color::orange();
+    } else if(color == "brown") {
+        return Color::brown();
+    } else if(color == "purple") {
+        return Color::purple();
+    } else {
+        std::cerr << "error: color = " << color << "\n";
+    }
+}
+
 void Color::rgb(double r, double g, double b)
 {
     this->r = r;

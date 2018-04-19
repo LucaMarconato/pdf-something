@@ -72,9 +72,6 @@ void File::close()
         //if all is correct the destructor was already called so we can ignore this call
         return;
     }
-    if(this->content != nullptr) {
-        delete [] this->content;
-    }    
     delete ::fstreams[this->uuid_of_frontend_resource];
     auto e = ::fstreams.find(this->uuid_of_frontend_resource);
     if(e == ::fstreams.end()) {
@@ -103,19 +100,18 @@ unsigned long long File::size()
     return file_size;
 }
 
-void File::read_all_content(bool append_null)
+void File::read_all_content(bool append_null, char ** buffer)
 {
     std::fstream * file = ::fstreams[this->uuid_of_frontend_resource];
-    if(this->content != nullptr) {
-        std::cerr << "error: this->content != nullptr, probably read_all_content() has already been called\n";
-        return;
+    if(*buffer != nullptr) {
+        std::cerr << "warning: *buffer != nullptr\n";
     }
     unsigned long long file_size = this->size();
-    this->content = new char [file_size + (append_null ? 1 : 0)];
+    *buffer = new char [file_size + (append_null ? 1 : 0)];
     
-    file->read(this->content, file_size);
+    file->read(*buffer, file_size);
     if(append_null) {
-        this->content[file_size] = '\0';
+        (*buffer)[file_size] = '\0';
     }
 }
 
