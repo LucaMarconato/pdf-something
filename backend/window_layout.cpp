@@ -9,7 +9,7 @@ Window_layout_element::Window_layout_element()
     
 }
 
-Window_layout_element::Window_layout_element(Document * document)
+Window_layout_element::Window_layout_element(std::shared_ptr<Document> document)
 {
     this->document = document;
 }
@@ -21,8 +21,14 @@ Window_layout_element::Window_layout_element(const Window_layout_element & eleme
 
 Window_layout_element & Window_layout_element::operator=(Window_layout_element & obj)
 {
-    std::swap(this->document, obj.document);
+    Window_layout_element to_swap = Window_layout_element(obj);
+    swap(*this,to_swap);
     return *this;
+}
+
+void swap(Window_layout_element & obj1, Window_layout_element & obj2)
+{
+    std::swap(obj1.document,obj2.document);
 }
 
 std::ostream & operator<<(std::ostream & stream, const Window_layout_element & obj)

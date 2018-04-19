@@ -19,6 +19,14 @@ Uuid::Uuid(std::string uuid_string)
     this->empty_uuid = false;
 }
 
+bool Uuid::is_valid() const
+{
+    if(this->empty_uuid) {
+        std::cerr << "warning: this->empty_uuid = " << this->empty_uuid << "\n";        
+    }
+    return !this->empty_uuid;
+}
+
 std::vector<std::string> Uuid::generate_uuids(int count)
 {
     std::vector<std::string> uuids(count);
@@ -34,6 +42,11 @@ std::vector<std::string> Uuid::generate_uuids(int count)
 bool Uuid::operator==(const Uuid & u) const
 {
     return this->uuid_string == u.uuid_string;
+}
+
+bool Uuid::operator!=(const Uuid & u) const
+{
+    return !(this->operator==(u));
 }
 
 bool operator<(Uuid const & lhs, Uuid const & rhs)

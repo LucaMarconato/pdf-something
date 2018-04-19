@@ -15,14 +15,13 @@ public:
     Datetime();
     Datetime(std::string datetime);
     static Datetime now();
+    bool is_valid() const;
+    std::string to_string() const;
 
     friend std::ostream & operator<<(std::ostream & stream, const Datetime & obj);
-
-    std::string string_representation;
 private:
-    bool initialized = false;
     std::time_t time;
-    
+    bool initialized = false;
 };
 
 std::ostream & operator<<(std::ostream & stream, const Datetime & obj);

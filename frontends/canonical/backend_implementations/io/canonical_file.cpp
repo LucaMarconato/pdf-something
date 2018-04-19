@@ -67,11 +67,9 @@ File::~File()
 
 void File::close()
 {
+    
     if(!this->is_open) {
-        if(this->content != nullptr) {
-            std::cerr << "error: this->content should be equal to nullptr\n";
-            exit(1);
-        }
+        //if all is correct the destructor was already called so we can ignore this call
         return;
     }
     if(this->content != nullptr) {
