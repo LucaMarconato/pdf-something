@@ -43,10 +43,19 @@
       (WINDOW_MIN_X) <= (x0) && \
                 (x1) <= (WINDOW_MAX_X) && \
       (WINDOW_MIN_Y) <= (y0) && \
-                (y1) <= WINDOW_MAX_Y)
+                (y1) <= (WINDOW_MAX_Y))
 
 //--------------------------------
 
+#define TEST0(expression,message_string) \
+    do\
+        {\
+            if(!(expression)) {\
+                std::cerr << message_string << "\n";\
+                *(int *)"crash!" = 1;\
+            }\
+        }\
+    while(0)
 
 
 #endif //CONSTANTS_H

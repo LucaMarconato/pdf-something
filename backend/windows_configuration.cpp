@@ -42,7 +42,6 @@ void Windows_configuration::parse(char * file_content)
         unsigned int number_of_columns = j_window_layout["number_of_columns"].get<unsigned int>();        
         auto & j_window_layout_elements = j_window_layout["window_layout_elements"];
         Window_layout window_layout;
-        window.window_layout = window_layout;
         window_layout.set_layout(number_of_rows,number_of_columns);
         if(number_of_rows * number_of_columns != j_window_layout_elements.size()) {
             std::cerr << "error: number_of_rows = " << number_of_rows << ", number_of_columns = " << number_of_columns << "\n";
@@ -62,8 +61,10 @@ void Windows_configuration::parse(char * file_content)
                 j++;
             }
         }
-//        Windows_configuration::windows.push_back(window);
-        Windows_configuration::windows.push_back(Window());
+        window.window_layout = window_layout;
+        Windows_configuration::windows.push_back(window);
+        // Windows_configuration::windows.push_back(Window());
+    //    std::cerr << "error: Windows_configuration::windows.size() = " << Windows_configuration::windows.size() << "\n";
     }
 }
 
@@ -83,10 +84,9 @@ bool Windows_configuration::is_valid()
 void Windows_configuration::print(std::ostream & stream)
 {
     
-    stream << "Windows_configuration::already_initialized = " << Windows_configuration::already_initialized << "<BR>";
     stream << "Windows_configuration::windows:<BR>";
     for(auto & window: Windows_configuration::windows) {
-        stream << "window:";
+        stream << "-window:";
         stream << "<blockquote>";
         stream << window;
         stream << "</blockquote>";
