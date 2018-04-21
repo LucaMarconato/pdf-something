@@ -111,14 +111,15 @@ void Window::set_dimentions(bool fullscreen)
 }
 
 bool Window::is_valid() const
-{
+{    
     bool is_valid = true;
     if(!this->fullscreen) {
         is_valid = is_valid && VALID_WINDOW_SIZE(this->x0,this->y0,this->x1,this->y1);
+        TEST0(is_valid,"fullscreen/coords");
     }
-    is_valid = is_valid && this->monitor.is_valid();
-    is_valid = is_valid && this->virtual_screen.is_valid();
-    is_valid = is_valid && this->window_layout.is_valid();
+    is_valid = is_valid && this->monitor.is_valid(); TEST0(is_valid,"monitor");
+    is_valid = is_valid && this->virtual_screen.is_valid(); TEST0(is_valid,"virtual_screen");
+    is_valid = is_valid && this->window_layout.is_valid(); TEST0(is_valid,"window_layout");
 
     if(!is_valid) {
         std::cerr << "error: Window, is_valid = " << is_valid << "\n";

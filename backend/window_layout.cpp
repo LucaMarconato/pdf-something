@@ -48,8 +48,8 @@ bool Window_layout_element::is_valid() const
 
 std::ostream & operator<<(std::ostream & stream, const Window_layout_element & obj)
 {
-    stream << "obj.document:<BR>";
-    stream << obj.document;
+    stream << "*obj.document:<BR>";
+    stream << *obj.document;
     return stream;
 }
 
@@ -102,11 +102,11 @@ std::tuple<unsigned int, unsigned int> Window_layout::size()
 bool Window_layout::is_valid() const
 {    
     bool is_valid = true;
-    is_valid = is_valid && (0 < this->number_of_rows) && (this->number_of_rows <= this->max_rows());
-    is_valid = is_valid && (0 < this->number_of_columns) && (this->number_of_columns <= this->max_columns());
+    is_valid = is_valid && (0 < this->number_of_rows) && (this->number_of_rows <= this->max_rows()); TEST0(is_valid,"failed 0");
+    is_valid = is_valid && (0 < this->number_of_columns) && (this->number_of_columns <= this->max_columns()); TEST0(is_valid,"failed 1");
 
     if(this->window_layout_elements.size() > this->number_of_rows) {
-        is_valid = false;
+        is_valid = false; TEST0(is_valid,"failed 2");
     } else {
         bool each_column_has_the_same_length = true;
         unsigned int common_length;
@@ -116,13 +116,16 @@ bool Window_layout::is_valid() const
             } else {
                 if(common_length != this->window_layout_elements[i].size()) {
                     each_column_has_the_same_length = false;
+                    TEST0(is_valid,"failed 3");
                 }
             }
             if(this->window_layout_elements[i].size() > this->number_of_columns) {
                 is_valid = false;
+                TEST0(is_valid,"failed 4");
             }
         }
         is_valid = is_valid && each_column_has_the_same_length;
+        TEST0(is_valid,"failed 5");
     }
     if(!is_valid) {
         std::cerr << "error: Window_layout, is_valid = " << is_valid << "\n";
@@ -138,8 +141,8 @@ std::ostream & operator<<(std::ostream & stream, const Window_layout & obj)
         stream << "obj.max_rows() = " << obj.max_rows() << ", obj.max_columns() = " << obj.max_columns() << "<BR>";
         for(unsigned int i = 0; i < obj.number_of_rows; i++) {
             for(unsigned int j = 0; j < obj.number_of_columns; j++) {
+                stream << "-obj.window_layout_element (" << i << ", " << j << "):<BR>";
                 stream << "<blockquote>";
-                stream << "obj.window_layout_element (" << i << ", " << j << "):<BR>";
                 stream << obj.window_layout_elements[i][j];
                 stream << "</blockquote>"; 
             }

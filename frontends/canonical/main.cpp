@@ -29,10 +29,14 @@ int main(int argc, char * argv[])
       This because otherwise the user could get confused
     */
 
-    Uuid latest_opened_pdf_uuid = Mediator::get_latest_opened_pdf();
-    Document * latest_opened_pdf = Mediator::document_for_uuid(latest_opened_pdf_uuid);
-    std::cout << "latest_opened_pdf = " << latest_opened_pdf << "<BR>";
-    std::cout << "*latest_opened_pdf:<blockquote>" << *latest_opened_pdf << "</blockquote>";    
+    Mediator::load_latest_windows_configuration();
+    std::cout << "Windows_configuration\n";
+    Windows_configuration::print(std::cout);
+    
+    // Uuid latest_opened_pdf_uuid = Mediator::get_latest_opened_pdf();
+    // Document * latest_opened_pdf = Mediator::document_for_uuid(latest_opened_pdf_uuid);
+    // std::cout << "latest_opened_pdf = " << latest_opened_pdf << "<BR>";
+    // std::cout << "*latest_opened_pdf:<blockquote>" << *latest_opened_pdf << "</blockquote>";    
 
     // Virtual_screen virtual_screen;
     // std::cout << virtual_screen << "\n\n";

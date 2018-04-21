@@ -1,5 +1,5 @@
 # Build instruction for the canonical frontend.
-add_subdirectory(backend_implementations)
+# add_subdirectory(backend_implementations)
 include_directories (../../dependencies)
 file(GLOB SOURCES "./*.cpp")
 file(GLOB SOURCES_BACKEND_IMPLEMENTATION "./backend_implementations/*.cpp")
