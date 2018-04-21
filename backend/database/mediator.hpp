@@ -3,6 +3,7 @@
 
 #include "database.hpp"
 #include "resources_manager.hpp"
+#include "../windows_configuration.hpp"
 #include "../uuid.hpp"
 
 //this class is responsible to mediate from the database in order to return the results of predefined queries
@@ -12,6 +13,8 @@ public:
     static Pdf_page * pdf_page_for_uuid(Uuid const & uuid, Pdf_document * in_document);
     static Highlighting * highlighting_for_uuid(Uuid const & uuid, Document * in_document);
     static Highlighting_component * highlighting_component_for_uuid(Uuid const & uuid);
+
+    static void load_latest_windows_configuration();
 
     static bool document_is_loaded(Uuid uuid);
     static bool pdf_page_is_loaded(Uuid uuid);

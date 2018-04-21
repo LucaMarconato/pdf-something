@@ -34,6 +34,7 @@ Color Color::from_string(std::string color)
         return Color::purple();
     } else {
         std::cerr << "error: color = " << color << "\n";
+        return Color::black();
     }
 }
 

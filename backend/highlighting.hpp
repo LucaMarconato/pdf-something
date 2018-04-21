@@ -8,6 +8,7 @@
 #include "document.hpp"
 #include "pdf_document.hpp"
 #include "color.hpp"
+#include "constants.hpp"
 
 //for the moment I am only implementing rectangular highlightings
 
@@ -38,20 +39,17 @@ public:
     Uuid uuid;
     Highlighting * parent_highlighting = nullptr;
     Pdf_page * in_page = nullptr;
+
     /*
       The following values respect x0 < x1, y0 < y1, and the axes are like in the Cartesian plane.
       These values are usually in [0,1], where 0 and 1 refer to the border of the page of a document.
       If the user crops the page, then the value of a newly inserted highlighting will belong to a subrange of [0,1].
       The user, with a crop, can also enlarge a page beyond its original size. Values outside the range [0,1] describe highlighting inserted in such positions.
     */
-    double x0, y0, x1, y1;
-private:
-    //these constants are used to be sure that the above values cannot be excessively large
-    const double BORDER = 2.0;
-    const double MIN_X = 0.0 - BORDER;
-    const double MIN_Y = 0.0 - BORDER;
-    const double MAX_X = 1.0 + BORDER;
-    const double MAX_Y = 1.0 + BORDER;
+    double x0 = PAGE_MAX_X + 1;
+    double y0 = PAGE_MAX_Y + 1;
+    double x1 = PAGE_MAX_X + 1;
+    double y1 = PAGE_MAX_Y + 1;
     
 };
 std::ostream & operator<<(std::ostream & stream, const Highlighting_component & obj);

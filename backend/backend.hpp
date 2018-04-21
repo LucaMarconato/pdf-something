@@ -10,6 +10,7 @@
 #include "window_layout.hpp"
 #include "document.hpp"
 #include "window.hpp"
+#include "constants.hpp"
 
 #include "database/database.hpp"
 #include "database/mediator.hpp"

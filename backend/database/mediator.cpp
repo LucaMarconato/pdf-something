@@ -1,6 +1,7 @@
 #include "mediator.hpp"
 
 #include "../io/file.hpp"
+#include "../windows_configuration.hpp"
 
 #include <iostream>
 
@@ -15,22 +16,11 @@ Document * Mediator::document_for_uuid(Uuid const & uuid)
     
     auto e = loaded.find(uuid);
     if(e == loaded.end()) {
-        File file;
-        std::string file_path = "data/" + uuid.uuid_string + "/info.json";
-        file.open(file_path, File::READ_BINARY);
-        if(!file.is_open) {
-            std::cerr << "error: unable to locate the document uuid = " << uuid << "\n";
-            exit(1);
-        } else {
-            char * buffer = nullptr;
-            file.read_all_content(true,&buffer);
-            // std::cout << "read " << file.size()/1024 << " KBs\n";
-            auto document = Document::parse_document(buffer);
-            Resources_manager::loaded_documents[uuid] = document;
-            file.close();
-            delete [] buffer;
-            return document;
-        }
+        char * buffer = Database::read_document(uuid);
+        auto document = Document::parse(buffer);
+        delete [] buffer;
+        Resources_manager::loaded_documents[uuid] = document;
+        return document;
     } else {
         return e->second;
     }    
@@ -92,6 +82,14 @@ Highlighting_component * Mediator::highlighting_component_for_uuid(Uuid const & 
     } else {
         return e->second;
     }
+}
+
+void Mediator::load_latest_windows_configuration()
+{
+    char * buffer = Database::read_latest_windows_configuration();
+    Windows_configuration::parse(buffer);
+    
+    delete [] buffer;
 }
 
 bool Mediator::document_is_loaded(Uuid uuid)

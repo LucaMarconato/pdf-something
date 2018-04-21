@@ -38,7 +38,12 @@ void Pdf_document::load_all_pages(json const & j)
             Highlighting_component * highlighting_component = Mediator::highlighting_component_for_uuid(highlighting_component_uuid);
             highlighting_component->in_page = page;
             page->highlighting_components.push_back(highlighting_component);
-        }        
+        }
+        auto & j_crop = j_page["crop"]; 
+        page->x0_crop = j_crop["x0"].get<double>(); 
+        page->y0_crop = j_crop["y0"].get<double>(); 
+        page->x1_crop = j_crop["x1"].get<double>(); 
+        page->y1_crop = j_crop["y1"].get<double>();
     }
     //--------giving pages the correct number--------
     /*

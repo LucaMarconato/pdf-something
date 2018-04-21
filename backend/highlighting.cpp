@@ -44,19 +44,12 @@ std::ostream & operator <<(std::ostream & stream, const Highlighting & obj)
 }
 
 //highlighting component
-#define VALID_COORDINATES(x0,x1,y0,y1) \
-                                         (x0 <  x1 && \
-                                          y0 <  y1 && \
-                                 this->MIN_X <= x0 && \
-                                          x1 <= this->MAX_X && \
-                                 this->MIN_Y <= y0 && \
-                                          y1 <= this->MAX_Y)
 
 bool Highlighting_component::is_valid() const
 {
     bool is_valid = true;
 
-    is_valid = is_valid && VALID_COORDINATES(x0,x1,y0,y1);
+    is_valid = is_valid && VALID_PAGE_COORDINATES(x0,y0,x1,y1);
     is_valid = is_valid && this->uuid.is_valid();
     is_valid = is_valid && this->parent_highlighting != nullptr;
     is_valid = is_valid && this->in_page != nullptr;

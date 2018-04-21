@@ -14,7 +14,14 @@
                 "707cb4c4-b410-4bbf-8b8a-891b52b9a6c3",
                 "64a05ad2-caa0-41a1-9b3c-a6b31bd6eba0",
                 "53b0c38c-9be5-4fcc-b33d-b8045790bd77"
-            ]
+            ],
+            "crop":
+            {
+                "x0": 0,
+                "y0": 0,
+                "x1": 1,
+                "y1": 1
+            }
         },
         {
             "uuid": "f2d4fe37-797b-4bb0-abf3-2c7b483a332e",
@@ -22,7 +29,14 @@
             "highlighting_components":
             [
                 
-            ]
+            ],
+            "crop":
+            {
+                "x0": 0,
+                "y0": 0,
+                "x1": 1,
+                "y1": 1
+            }
         },
         {
             "uuid": "d623d107-2192-4143-8643-384000aa9dd7",
@@ -34,7 +48,14 @@
                 "5e7fbc15-e28d-4a61-8cc0-da29b572044a",
                 "babc4c9c-e604-4a83-8470-ed7bc3d522ed",
                 "7a06e7ce-05cf-468e-a32c-cbeb07c81d24"
-            ]
+            ],
+            "crop":
+            {
+                "x0": 0,
+                "y0": 0,
+                "x1": 1,
+                "y1": 1
+            }
         }
     ],
     "highlightings":

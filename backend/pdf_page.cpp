@@ -9,10 +9,6 @@
 #include "database/resources_manager.hpp"
 #include "database/mediator.hpp"
 
-#define VALID_WIDTH(width) (width > 0 && width < this->MAX_WIDTH)
-#define VALID_HEIGHT(height) (height > 0 && height < this->MAX_HEIGHT)
-#define VALID_INDEXES(index,index_in_pdf) (index < this->MAX_INDEX && index_in_pdf < this->MAX_INDEX)
-
 /*
   This constructor is needed by std::map beucase it must be able to create new empty objects.
   If we do not like this constructor to be public we can make this class a friend of std::map
@@ -64,15 +60,13 @@ inline bool Pdf_page::is_valid() const
 {
     bool is_valid = true;
     is_valid = is_valid && this->uuid.is_valid();
+    is_valid = is_valid && VALID_PAGE_WIDTH(this->width);
+    is_valid = is_valid && VALID_PAGE_HEIGHT(this->height);
+    is_valid = is_valid && VALID_PAGE_INDEX(this->index);
+    is_valid = is_valid && VALID_PAGE_INDEX(this->index_in_pdf);
+    is_valid = is_valid && VALID_PAGE_COORDINATES(this->x0_crop, this->y0_crop, this->x1_crop, this->y1_crop);
+    is_valid = is_valid && this->in_document != nullptr;
 
-    if(!VALID_WIDTH(this->width) || !VALID_HEIGHT(this->height) || !VALID_INDEXES(this->index,this->index_in_pdf)) {
-        is_valid = false;
-        std::cerr << "warning: this->width = " << this->width << ", this->height = " << this->height << ", this->index = " << this->index << ", this->index_in_pdf = " << this->index_in_pdf << "\n";
-    }
-    if(this->in_document == nullptr) {
-        is_valid = false;
-        std::cerr << "warning: this->in_doument is not initialized\n";        
-    }
     if(!is_valid) {
         std::cerr << "error: Pdf_page, is_valid = " << is_valid << "\n";
     }
@@ -92,6 +86,7 @@ std::ostream & operator<<(std::ostream & stream, const Pdf_page & obj)
         stream << "obj.height = " << obj.height << "<BR>";
         stream << "obj.index = " << obj.index << "<BR>";
         stream << "obj.index_in_pdf = " << obj.index_in_pdf << "<BR>";
+        stream << "obj.x0_crop = " << obj.x0_crop << ", obj.y0_crop = " << obj.y0_crop << ", obj.x1_crop = " << obj.x1_crop << ", obj.y1_crop = " << obj.y1_crop << "<BR>";
         stream << "obj.highlighting_components:<BR>";
         for(auto && h: obj.highlighting_components) {
             stream << "-higlighting_component:";
