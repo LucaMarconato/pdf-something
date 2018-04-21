@@ -2,6 +2,8 @@
 
 #include <iostream>
 
+#include "constants.hpp"
+
 //window layout element
 
 Window_layout_element::Window_layout_element()
@@ -9,9 +11,10 @@ Window_layout_element::Window_layout_element()
     
 }
 
-Window_layout_element::Window_layout_element(std::shared_ptr<Document> document)
+Window_layout_element::Window_layout_element(Document * document, unsigned int index)
 {
     this->document = document;
+    this->index = index;
 }
 
 Window_layout_element::Window_layout_element(const Window_layout_element & element)
@@ -31,10 +34,22 @@ void swap(Window_layout_element & obj1, Window_layout_element & obj2)
     std::swap(obj1.document,obj2.document);
 }
 
+bool Window_layout_element::is_valid() const
+{
+    bool is_valid = true;
+    is_valid = is_valid && this->document != nullptr;
+    is_valid = is_valid && VALID_PAGE_INDEX(this->index);
+
+    if(!is_valid) {
+        std::cerr << "error: Window_layout_element, is_valid = " << is_valid << "\n";
+    }
+    return is_valid;
+}
+
 std::ostream & operator<<(std::ostream & stream, const Window_layout_element & obj)
 {
-    stream << "obj.document:\n";
-    stream << obj.document << "\n";
+    stream << "obj.document:<BR>";
+    stream << obj.document;
     return stream;
 }
 
@@ -55,12 +70,13 @@ void Window_layout::set_layout(unsigned int number_of_rows, unsigned int number_
     this->window_layout_elements.clear();
     //fun fact: in Swift, the following line of code would assign the same new object to each element of the vector
     this->window_layout_elements.resize(this->number_of_rows,std::vector<Window_layout_element>(this->number_of_columns));
-    integrity_check_passed();
+    is_valid();
 }
 
 void Window_layout::set_layout_element(Window_layout_element & element, unsigned int row, unsigned int column)
 {
-    if(!this->integrity_check_passed()) {
+    if(!this->is_valid()) {
+        std::cerr << "error: set_layout_element, is_valid() = 0\n";
         return;
     }
     if(row >= this->number_of_rows) {
@@ -83,22 +99,14 @@ std::tuple<unsigned int, unsigned int> Window_layout::size()
   This function checks that number_of_rows <= max_rows() and the same for columns.
   It also checks if the size of the 2D vector window_layout_elements is conform to the number described in the previous lines.
 */
-bool Window_layout::integrity_check_passed() const
+bool Window_layout::is_valid() const
 {    
-    bool is_all_right = true;
-    if(this->number_of_rows > this->max_rows()) {
-        std::cerr << "error: this->number_of_rows = " << this->number_of_rows << ", this->max_rows() = " << this->max_rows() << "\n";
-        is_all_right = false;
-    }
-    
-    if(this->number_of_columns > this->max_columns()) {
-        std::cerr << "error: this->number_of_columns = " << this->number_of_columns << ", this->max_columns() = " << this->max_columns() << "\n";
-        is_all_right = false;
-    }
+    bool is_valid = true;
+    is_valid = is_valid && (0 < this->number_of_rows) && (this->number_of_rows <= this->max_rows());
+    is_valid = is_valid && (0 < this->number_of_columns) && (this->number_of_columns <= this->max_columns());
 
     if(this->window_layout_elements.size() > this->number_of_rows) {
-        std::cerr << "error: this->window_layout_elements.size() = " << this->window_layout_elements.size() << ", this->number_of_rows = " << this->number_of_rows << "\n";
-        is_all_right = false;
+        is_valid = false;
     } else {
         bool each_column_has_the_same_length = true;
         unsigned int common_length;
@@ -108,31 +116,36 @@ bool Window_layout::integrity_check_passed() const
             } else {
                 if(common_length != this->window_layout_elements[i].size()) {
                     each_column_has_the_same_length = false;
-                    std::cerr << "error: common_length = " << common_length << ", this->window_layout_elements[" << i << "].size() = " << this->window_layout_elements[i].size() << "\n";
                 }
             }
             if(this->window_layout_elements[i].size() > this->number_of_columns) {
-                std::cerr << "error: this->window_layout_elements[i].size() = " << this->window_layout_elements[i].size() << ", this->number_of_columns = " << this->number_of_columns << "\n";
-                is_all_right = false;
+                is_valid = false;
             }
         }
-        is_all_right = is_all_right && each_column_has_the_same_length;
+        is_valid = is_valid && each_column_has_the_same_length;
     }
-
-    return is_all_right;
+    if(!is_valid) {
+        std::cerr << "error: Window_layout, is_valid = " << is_valid << "\n";
+    }
+    
+    return is_valid;
 }
 
 std::ostream & operator<<(std::ostream & stream, const Window_layout & obj)
 {
-    stream << "obj.number_of_rows = " << obj.number_of_rows << ", obj.number_of_columns = " << obj.number_of_columns << "\n";
-    stream << "obj.max_rows() = " << obj.max_rows() << ", obj.max_columns() = " << obj.max_columns() << "\n";
-    if(obj.integrity_check_passed()) {
+    if(obj.is_valid()) {
+        stream << "obj.number_of_rows = " << obj.number_of_rows << ", obj.number_of_columns = " << obj.number_of_columns << "<BR>";
+        stream << "obj.max_rows() = " << obj.max_rows() << ", obj.max_columns() = " << obj.max_columns() << "<BR>";
         for(unsigned int i = 0; i < obj.number_of_rows; i++) {
             for(unsigned int j = 0; j < obj.number_of_columns; j++) {
-                stream << "obj.window_layout_element (" << i << ", " << j << "):\n";
+                stream << "<blockquote>";
+                stream << "obj.window_layout_element (" << i << ", " << j << "):<BR>";
                 stream << obj.window_layout_elements[i][j];
+                stream << "</blockquote>"; 
             }
         }   
+    } else {
+        stream << "<unitialized window_layout>";
     }
     return stream;
 }

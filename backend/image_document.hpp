@@ -17,8 +17,8 @@ public:
     }
     void print(std::ostream &stream) const
     {
-        std::cout << "this class is only sketched\n";
-        exit(1);
+        stream << "this class is only sketched\n";
+        // exit(1);
     }
 };
 

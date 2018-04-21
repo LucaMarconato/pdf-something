@@ -3,12 +3,11 @@
 #include <iostream>
 
 #include <nlohmann/json.hpp>
+using json = nlohmann::json;
 
 #include "pdf_document.hpp"
 
-using json = nlohmann::json;
-
-Document * Document::parse_document(char * file_content)
+Document * Document::parse(char * file_content)
 {
     // std::cout << "file_content = " << file_content << "\n";
     auto j = json::parse(file_content);
@@ -37,16 +36,11 @@ bool Document::is_valid_base() const
     bool is_valid = true;
     is_valid = is_valid && this->uuid.is_valid();
     is_valid = is_valid && this->latest_opening.is_valid();
-    if(this->in_program_directory == "") {
-        std::cerr << "warning: this->in_program_directory = " << this->in_program_directory << "\n";
-        is_valid = false;
-    }
-    if(this->name == "") {
-        std::cerr << "warning: this->name = " << this->name << "\n";
-    }
+    is_valid = is_valid && this->in_program_directory != "";
+    is_valid = is_valid && this->name != "";
     
     if(!is_valid) {
-        std::cerr << "error: is_valid = " << is_valid << "\n";
+        std::cerr << "error: Document, is_valid = " << is_valid << "\n";
     }
     return is_valid;
 }

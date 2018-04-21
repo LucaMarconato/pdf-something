@@ -17,6 +17,7 @@ public:
     bool operator!=(const Uuid & u) const;
     //for using an Uuid as a key in an std::map
     friend bool operator<(Uuid const & lhs, Uuid const & rhs);
+    friend std::ostream & operator<<(std::ostream & stream, const Uuid & obj);
     //here I am using a string for representing an uuid, but we will need to use the byte representation
     std::string uuid_string = "";
 
