@@ -3,7 +3,7 @@
 
 #include <string>
 
-#include "window_layout.hpp"
+#include "window_split_screen.hpp"
 #include "constants.hpp"
 
 /*
@@ -57,7 +57,7 @@ public:
     */
     Virtual_screen virtual_screen;
     Monitor monitor;
-    Window_layout window_layout;
+    Window_split_screen window_split_screen;
 private:
     bool is_valid() const;
     //the following values are non-negative, respect x0 < x1 and y0 < y1, are expressed in pixel and the axes are like in the Cartesian plane

@@ -1,6 +1,7 @@
 #include "window.hpp"
 
 #include <iostream>
+#include <cassert>
 
 //--------virtual screen--------
 
@@ -32,7 +33,7 @@ std::ostream & operator<<(std::ostream & stream, const Virtual_screen & obj)
         stream << "obj.id = " << obj.id;
         return stream;
     } else {
-        stream << "<uninitialized virtual screen>";
+        stream << "[uninitialized virtual screen]";
     }
     return stream;
 }
@@ -69,7 +70,7 @@ std::ostream & operator<<(std::ostream & stream, const Monitor & obj)
         stream << "obj.name = " << obj.name;
         stream << "\n";        
     } else {
-        stream << "<uninitialized monitor>";
+        stream << "[uninitialized monitor]";
     }
     return stream;    
 }
@@ -85,7 +86,7 @@ Window::Window(const Window & obj)
 {
     this->virtual_screen = obj.virtual_screen;
     this->monitor = obj.monitor;
-    this->window_layout = obj.window_layout;
+    this->window_split_screen = obj.window_split_screen;
     this->x0 = obj.x0;
     this->y0 = obj.y0;
     this->x1 = obj.x1;
@@ -115,11 +116,11 @@ bool Window::is_valid() const
     bool is_valid = true;
     if(!this->fullscreen) {
         is_valid = is_valid && VALID_WINDOW_SIZE(this->x0,this->y0,this->x1,this->y1);
-        TEST0(is_valid,"fullscreen/coords");
+        MY_ASSERT(is_valid);
     }
-    is_valid = is_valid && this->monitor.is_valid(); TEST0(is_valid,"monitor");
-    is_valid = is_valid && this->virtual_screen.is_valid(); TEST0(is_valid,"virtual_screen");
-    is_valid = is_valid && this->window_layout.is_valid(); TEST0(is_valid,"window_layout");
+    is_valid = is_valid && this->monitor.is_valid(); MY_ASSERT(is_valid);
+    is_valid = is_valid && this->virtual_screen.is_valid(); MY_ASSERT(is_valid);
+    is_valid = is_valid && this->window_split_screen.is_valid(); MY_ASSERT(is_valid);
 
     if(!is_valid) {
         std::cerr << "error: Window, is_valid = " << is_valid << "\n";
@@ -143,10 +144,10 @@ std::ostream & operator<<(std::ostream & stream, const Window & obj)
         stream << obj.monitor;
         stream << "</blockquote>";
         stream << "obj.window_layout<blockquote>";
-        stream << obj.window_layout;
+        stream << obj.window_split_screen;
         stream << "</blockquote>";
     } else {
-        stream << "<uninitialized window>";
+        stream << "[uninitialized window]";
     }
 
     return stream;

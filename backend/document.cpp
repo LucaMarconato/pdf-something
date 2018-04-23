@@ -10,7 +10,10 @@ using json = nlohmann::json;
 Document * Document::parse(char * file_content)
 {
     // std::cout << "file_content = " << file_content << "\n";
+    std::cerr << "starting parsing json file\n";
     auto j = json::parse(file_content);
+    std::cerr << "finished parsing json file\n";
+    
     if(j["format"] == "pdf") {        
         Pdf_document * document = new Pdf_document(j);
         document->load_all_pages(j);
@@ -65,7 +68,7 @@ if (this->is_valid())
         stream << "this->name = " << this->name << "<BR>";
         stream << "this->latest_opening = " << this->latest_opening;
     } else {
-        stream << "<uninitialized document>";
+        stream << "[uninitialized document]";
     }
 
 }

@@ -38,7 +38,7 @@ std::ostream & operator <<(std::ostream & stream, const Highlighting & obj)
             stream << "</blockquote>";
         }
     } else {
-        stream << "<uninitialized highighting>";
+        stream << "[uninitialized highighting]";
     }
     return stream;
 }
@@ -73,7 +73,7 @@ std::ostream & operator <<(std::ostream & stream, const Highlighting_component &
         stream << *obj.parent_highlighting;
         stream << "</blockquote>";
     } else {
-        stream << "<uninitialized highlighting component>";
+        stream << "[uninitialized highlighting component]";
     }
     return stream;
 }

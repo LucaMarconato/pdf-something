@@ -32,7 +32,7 @@ Pdf_page * Mediator::pdf_page_for_uuid(Uuid const & uuid, Pdf_document * in_docu
     std::map<Uuid, Pdf_page *> loaded = Resources_manager::loaded_pdf_pages;
     
     auto e = loaded.find(uuid);
-    if(e == loaded.end()) {
+    if(e == loaded.end()) {        
         Pdf_page * pdf_page = new Pdf_page(in_document);
         pdf_page->uuid = uuid;
         Resources_manager::loaded_pdf_pages.insert(std::make_pair(uuid,pdf_page));

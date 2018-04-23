@@ -9,7 +9,7 @@
 
 Uuid::Uuid()
 {
-    this->uuid_string = Uuid::generate_uuids(1).front();
+    // this->uuid_string = Uuid::generate_uuids(1).front();
     this->empty_uuid = false;
 }
 
@@ -29,6 +29,7 @@ bool Uuid::is_valid() const
 
 std::vector<std::string> Uuid::generate_uuids(int count)
 {
+    // std::cerr << "generated an uuid!\n";
     std::vector<std::string> uuids(count);
     boost::uuids::random_generator generator;
 
@@ -48,6 +49,11 @@ bool Uuid::operator!=(const Uuid & u) const
 {
     return !(this->operator==(u));
 }
+
+// void Uuid::bulk_generate_uuid_async()
+// {
+    
+// }
 
 bool operator<(Uuid const & lhs, Uuid const & rhs)
 {

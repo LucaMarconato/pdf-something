@@ -3,5 +3,6 @@
         "list": "cpp"
     },
     "editor.wordWrap": "on",
-    "workbench.editor.showTabs": false
+    "workbench.editor.showTabs": false,
+    "C_Cpp.intelliSenseEngineFallback": "Disabled"
 }

@@ -22,11 +22,16 @@ Pdf_document::Pdf_document(json const & j)
 void Pdf_document::load_all_pages(json const & j)
 {    
     if(this->pages.size() > 0 || this->numbering.size() > 0) {
-        std::cerr << "error: this->pages.size() = " << this->pages.size() << ", this->numbering.size() = " << this->numbering.size() << "\n";
+        std::cerr << "this->pages.size() = " << this->pages.size() << ", this->numbering.size() = " << this->numbering.size() << "\n";
         return;
     }
     //--------allocating the pages and the highlighting components, putting them into the pages--------
+    unsigned int i_page = 0;
     for(auto && j_page : j["pages"]) {
+        if(i_page % 10 == 0) {
+            std::cerr << "loading page i_page = " << i_page << "\n";
+        }
+        i_page++;
         Uuid page_uuid(j_page["uuid"].get<std::string>());
         Pdf_page * page = Mediator::pdf_page_for_uuid(page_uuid, this);
         page->index_in_pdf = j_page["index_in_pdf"];
@@ -52,11 +57,13 @@ void Pdf_document::load_all_pages(json const & j)
       In the .json file for each page there are three pieces of information: its uuid, the uuid of the previous page and the uuid of the next pages.
       The pages can be listed in a generic order (because pages can be moved), this is the reason I find useful to use an std::map
     */
+    std::cerr << "giving pages ordering\n";
     std::map<Uuid,Uuid> map_linked_list_forward;
     std::map<Uuid,Uuid> map_linked_list_backward;
     Uuid first;
     Uuid last;
     for(auto && j_page_ordering : j["pages_ordering"]) {
+        // std::cerr << j["page_ordering"] << "\n";
         Uuid page_uuid(j_page_ordering["uuid"].get<std::string>());
         auto & j_ordering = j_page_ordering["ordering"];
         std::string prev = j_ordering["prev"].get<std::string>();
@@ -84,6 +91,8 @@ void Pdf_document::load_all_pages(json const & j)
         std::cerr << "error: unable to create the linked list for the page ordering\n";
         exit(1);
     }
+
+    std::cerr << "built the maps\n";
 
     //build the linked lists
     std::list<Uuid> linked_list_forward;    
@@ -115,6 +124,8 @@ void Pdf_document::load_all_pages(json const & j)
             current = &(map_linked_list[*current]);
         }
     };
+
+    std::cerr << "built the linked lists\n";
     
     build_linked_list_from_map(map_linked_list_forward, linked_list_forward, first, last);
     build_linked_list_from_map(map_linked_list_backward, linked_list_backward, last, first);
@@ -137,7 +148,11 @@ void Pdf_document::load_all_pages(json const & j)
         jt++;
         i++;
     }
+
+    std::cerr << "set the page ordering\n";
+    
     //--------loading the highlightings--------
+    std::cerr << "started loading the highlightings\n";    
     for(auto && j_highlighting : j["highlightings"]) {
         Uuid highlighting_uuid(j_highlighting["uuid"].get<std::string>());
         Highlighting * highlighting = Mediator::highlighting_for_uuid(highlighting_uuid,this);
@@ -145,7 +160,10 @@ void Pdf_document::load_all_pages(json const & j)
         highlighting->color = Color::from_string(j_highlighting["color"].get<std::string>());
         highlighting->text = j_highlighting["text"].get<std::string>();
     }
+    std::cerr << "finished loading the highlightings\n";
+    
     //--------loading the highlighting components--------
+    std::cerr << "started loading the highlighting components\n";
     for(auto && j_highlighting_component : j["highlighting_components"]) {
         Uuid highlighting_component_uuid(j_highlighting_component["uuid"].get<std::string>());
         Uuid parent_highlighting_uuid(j_highlighting_component["parent_highlighting"].get<std::string>());
@@ -162,6 +180,7 @@ void Pdf_document::load_all_pages(json const & j)
         highlighting_component->y0 = y0;
         highlighting_component->y1 = y1;
     }
+    std::cerr << "finished loading the highlighting components\n";
 }
 
 bool Pdf_document::is_valid() const
@@ -234,7 +253,7 @@ void Pdf_document::print(std::ostream &stream) const
             stream << "</blockquote>";
         }
     } else {
-        stream << "<uninitialized pdf document>";
+        stream << "[uninitialized pdf document]";
     }
 
 }

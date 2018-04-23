@@ -16,6 +16,11 @@
 },
 {
   "directory": "/Users/macbook/programming/_projects/pdf-something/backend",
+  "command": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++    -I/Users/macbook/programming/_projects/pdf-something/backend/../dependencies -I/Users/macbook/programming/_projects/pdf-something/backend  -O3 -DNDEBUG   -std=c++17 -Wall -g -O0 -o CMakeFiles/libbackend.dir/grid_layout.cpp.o -c /Users/macbook/programming/_projects/pdf-something/backend/grid_layout.cpp",
+  "file": "/Users/macbook/programming/_projects/pdf-something/backend/grid_layout.cpp"
+},
+{
+  "directory": "/Users/macbook/programming/_projects/pdf-something/backend",
   "command": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++    -I/Users/macbook/programming/_projects/pdf-something/backend/../dependencies -I/Users/macbook/programming/_projects/pdf-something/backend  -O3 -DNDEBUG   -std=c++17 -Wall -g -O0 -o CMakeFiles/libbackend.dir/highlighting.cpp.o -c /Users/macbook/programming/_projects/pdf-something/backend/highlighting.cpp",
   "file": "/Users/macbook/programming/_projects/pdf-something/backend/highlighting.cpp"
 },
@@ -41,8 +46,8 @@
 },
 {
   "directory": "/Users/macbook/programming/_projects/pdf-something/backend",
-  "command": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++    -I/Users/macbook/programming/_projects/pdf-something/backend/../dependencies -I/Users/macbook/programming/_projects/pdf-something/backend  -O3 -DNDEBUG   -std=c++17 -Wall -g -O0 -o CMakeFiles/libbackend.dir/window_layout.cpp.o -c /Users/macbook/programming/_projects/pdf-something/backend/window_layout.cpp",
-  "file": "/Users/macbook/programming/_projects/pdf-something/backend/window_layout.cpp"
+  "command": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++    -I/Users/macbook/programming/_projects/pdf-something/backend/../dependencies -I/Users/macbook/programming/_projects/pdf-something/backend  -O3 -DNDEBUG   -std=c++17 -Wall -g -O0 -o CMakeFiles/libbackend.dir/window_split_screen.cpp.o -c /Users/macbook/programming/_projects/pdf-something/backend/window_split_screen.cpp",
+  "file": "/Users/macbook/programming/_projects/pdf-something/backend/window_split_screen.cpp"
 },
 {
   "directory": "/Users/macbook/programming/_projects/pdf-something/backend",

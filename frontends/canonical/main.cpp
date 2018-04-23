@@ -14,7 +14,7 @@ int main(int argc, char * argv[])
               -monitor (class Monitor) and virtual screen (class Virtual_screen) they where located
               -position and size (or fullscreen)
               -for each window:
-                  -window split layout (a grid inside the window, class Window_layout), for each grid position in the layout (class Window_layout_element):
+                  -window split screen (a grid inside the window (1x2, 2x1 except for big screens), class Window_split_screen), for each grid position in the (class Window_split_screen_element):
                       -the pdf which was open
                       -page it was opened
                       -zoom information
@@ -28,37 +28,9 @@ int main(int argc, char * argv[])
       The cursor which was used (pen/rubber/highlighter/etc) is not recovered from the last section and it is shared among windows/split screen layouts.
       This because otherwise the user could get confused
     */
-
     Mediator::load_latest_windows_configuration();
-    std::cout << "Windows_configuration\n";
-    Windows_configuration::print(std::cout);
+    // std::cout << "Windows_configuration\n";
+    // Windows_configuration::print(std::cout);
     
-    // Uuid latest_opened_pdf_uuid = Mediator::get_latest_opened_pdf();
-    // Document * latest_opened_pdf = Mediator::document_for_uuid(latest_opened_pdf_uuid);
-    // std::cout << "latest_opened_pdf = " << latest_opened_pdf << "<BR>";
-    // std::cout << "*latest_opened_pdf:<blockquote>" << *latest_opened_pdf << "</blockquote>";    
-
-    // Virtual_screen virtual_screen;
-    // std::cout << virtual_screen << "\n\n";
-    
-    // Monitor monitor;
-    // std::cout << monitor << "\n\n";
-
-    // Window window(0,0,1200,800);
-    // window.virtual_screen = &virtual_screen;
-    // window.monitor = &monitor;
-    // std::cout << window << "\n\n";
-
-    // Window_layout window_layout;
-    // unsigned int rows = 2, columns = 3;
-    // window_layout.set_layout(rows,columns);
-    // std::tie(rows, columns) = window_layout.size();
-    // for(unsigned int i = 0; i < rows; i++) {
-    //     for(unsigned int j = 0; j < columns; j++) {
-    //         Window_layout_element e(&document);
-    //         window_layout.set_layout_element(e,i,j);
-    //     }
-    // }
-    // std::cout << window_layout << "\n\n";
     return 0;
 }

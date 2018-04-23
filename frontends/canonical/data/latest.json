@@ -4,24 +4,32 @@
         {
             "virtual_screen": "",
             "monitor": "",
-            "fullscreen": "false",
+            "fullscreen": "true",
             "x0": 0,
             "y0": 0,
-            "x1": 1920,
-            "y1": 1080,
-            "window_layout":
+            "x1": 0,
+            "y1": 0,
+            "window_split_screen":
             {
                 "number_of_rows": 1,
                 "number_of_columns": 2,
-                "window_layout_elements":
+                "window_split_screen_elements":
                 [
                     {
-                        "document": "84f3415d-4f59-4333-9f8b-b4f9f1e9a5fb",
-                        "current_index": 1
+                        "document": "f9f2c8ce-1f40-4578-a193-2c9a57e8f0c6",
+                        "current_index": 41,
+                        "grid_layout": {
+                            "rows": 2,
+                            "columns": 4
+                        }
                     },
                     {
                         "document": "84f3415d-4f59-4333-9f8b-b4f9f1e9a5fb",
-                        "current_index": 2
+                        "current_index": 1,
+                        "grid_layout": {
+                            "rows": 2,
+                            "columns": 4
+                        }
                     }
                 ]
             }
@@ -29,24 +37,32 @@
         {
             "virtual_screen": "",
             "monitor": "",
-            "fullscreen": "true",
+            "fullscreen": "false",
             "x0": 0,
             "y0": 0,
-            "x1": 0,
-            "y1": 0,
-            "window_layout":
+            "x1": 1920,
+            "y1": 1080,
+            "window_split_screen":
             {
                 "number_of_rows": 1,
                 "number_of_columns": 2,
-                "window_layout_elements":
+                "window_split_screen_elements":
                 [
                     {
                         "document": "84f3415d-4f59-4333-9f8b-b4f9f1e9a5fb",
-                        "current_index": 1
+                        "current_index": 1,
+                        "grid_layout": {
+                            "rows": 3,
+                            "columns": 3
+                        }
                     },
                     {
                         "document": "84f3415d-4f59-4333-9f8b-b4f9f1e9a5fb",
-                        "current_index": 1
+                        "current_index": 2,
+                        "grid_layout": {
+                            "rows": 2,
+                            "columns": 2
+                        }
                     }
                 ]
             }

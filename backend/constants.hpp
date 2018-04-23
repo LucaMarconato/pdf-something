@@ -47,15 +47,19 @@
 
 //--------------------------------
 
-#define TEST0(expression,message_string) \
-    do\
-        {\
-            if(!(expression)) {\
-                std::cerr << message_string << "\n";\
-                *(int *)"crash!" = 1;\
-            }\
-        }\
-    while(0)
+#define GRID_LAYOUT_MAX_ROWS 6
+#define GRID_LAYOUT_MAX_COLUMNS 6
 
+#define VALID_GRID_LAYOUT(rows,columns) ((rows) > 0 && (rows) <= (GRID_LAYOUT_MAX_ROWS) && (columns) > 0 && (columns) <= (GRID_LAYOUT_MAX_COLUMNS))
+
+//--------------------------------
+
+#define MY_ASSERT(expression) \
+    do {\
+    	if(!(expression)) {\
+        	std::cerr << "error: MY_ASSERTION failed\n";\
+        	*(int *)"crash!" = true;\
+        }\
+    } while(0)
 
 #endif //CONSTANTS_H

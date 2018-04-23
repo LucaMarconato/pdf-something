@@ -1,8 +1,7 @@
 #include "windows_configuration.hpp"
 
-#include "window_layout.hpp"
+#include "window_split_screen.hpp"
 #include "database/mediator.hpp"
-#include "window_layout.hpp"
 
 #include <nlohmann/json.hpp>
 using json = nlohmann::json;
@@ -37,31 +36,35 @@ void Windows_configuration::parse(char * file_content)
         }
         window.monitor = monitor;
         window.virtual_screen = virtual_screen;
-        auto & j_window_layout = j_window["window_layout"];
-        unsigned int number_of_rows = j_window_layout["number_of_rows"].get<unsigned int>();
-        unsigned int number_of_columns = j_window_layout["number_of_columns"].get<unsigned int>();        
-        auto & j_window_layout_elements = j_window_layout["window_layout_elements"];
-        Window_layout window_layout;
-        window_layout.set_layout(number_of_rows,number_of_columns);
-        if(number_of_rows * number_of_columns != j_window_layout_elements.size()) {
-            std::cerr << "error: number_of_rows = " << number_of_rows << ", number_of_columns = " << number_of_columns << "\n";
+        auto & j_window_split_screen = j_window["window_split_screen"];
+        unsigned int split_screen_number_of_rows = j_window_split_screen["number_of_rows"].get<unsigned int>();
+        unsigned int split_screen_number_of_columns = j_window_split_screen["number_of_columns"].get<unsigned int>();        
+        auto & j_window_split_screen_elements = j_window_split_screen["window_split_screen_elements"];
+        Window_split_screen window_split_screen;
+        window_split_screen.set_split_screen_layout(split_screen_number_of_rows,split_screen_number_of_columns);
+        if(split_screen_number_of_rows * split_screen_number_of_columns != j_window_split_screen_elements.size()) {
+            std::cerr << "error: split_screen_number_of_rows = " << split_screen_number_of_rows << ", split_screen_number_of_columns = " << split_screen_number_of_columns << "\n";
             exit(1);
         }
         unsigned int i = 0;
         unsigned int j = 0;
-        for(auto && j_window_layout_element : j_window_layout_elements) {
-            Uuid document_uuid(j_window_layout_element["document"].get<std::string>());
-            unsigned int current_index = j_window_layout_element["current_index"].get<unsigned int>();
+        for(auto && j_window_split_screen_element : j_window_split_screen_elements) {
+            Uuid document_uuid(j_window_split_screen_element["document"].get<std::string>());
+            unsigned int current_index = j_window_split_screen_element["current_index"].get<unsigned int>();
             Document * document = Mediator::document_for_uuid(document_uuid);
-            Window_layout_element window_layout_element(document,current_index);
-            window_layout.set_layout_element(window_layout_element,i,j);
+            auto & j_grid_layout = j_window_split_screen_element["grid_layout"];
+            unsigned int grid_layout_number_of_rows = j_grid_layout["rows"].get<unsigned int>();
+            unsigned int grid_layout_number_of_columns = j_grid_layout["columns"].get<unsigned int>();;
+            Grid_layout grid_layout(grid_layout_number_of_rows, grid_layout_number_of_columns);
+            Window_split_screen_element window_split_screen_element(document,current_index,grid_layout);
+            window_split_screen.set_split_screen_element(window_split_screen_element,i,j);
             i++;
-            if(i == number_of_rows) {
+            if(i == split_screen_number_of_rows) {
                 i = 0;
                 j++;
             }
         }
-        window.window_layout = window_layout;
+        window.window_split_screen = window_split_screen;
         Windows_configuration::windows.push_back(window);
         // Windows_configuration::windows.push_back(Window());
     //    std::cerr << "error: Windows_configuration::windows.size() = " << Windows_configuration::windows.size() << "\n";

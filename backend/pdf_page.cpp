@@ -97,7 +97,7 @@ std::ostream & operator<<(std::ostream & stream, const Pdf_page & obj)
             stream << "</blockquote>";
         }
     } else {
-        stream << "<uninitialized pdf page>";
+        stream << "[uninitialized pdf page]";
     }
     return stream;
 }

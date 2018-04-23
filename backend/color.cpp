@@ -16,6 +16,8 @@ Color Color::from_string(std::string color)
 {
     if(color == "black") {
         return Color::black();
+    } else if(color == "gray") {
+        return Color::gray();
     } else if(color == "white") {
         return Color::white();
     } else if(color == "red") {
