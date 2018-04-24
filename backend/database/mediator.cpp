@@ -2,6 +2,7 @@
 
 #include "../io/file.hpp"
 #include "../windows_configuration.hpp"
+#include "../timer.hpp"
 
 #include <iostream>
 
@@ -12,7 +13,7 @@ Uuid Mediator::get_latest_opened_pdf()
 Document * Mediator::document_for_uuid(Uuid const & uuid)
 {
     //to make the code more readable
-    std::map<Uuid, Document *> loaded = Resources_manager::loaded_documents;
+    boost::unordered_map<Uuid, Document *> loaded = Resources_manager::loaded_documents;
     
     auto e = loaded.find(uuid);
     if(e == loaded.end()) {
@@ -26,44 +27,40 @@ Document * Mediator::document_for_uuid(Uuid const & uuid)
     }    
 }
 
-Pdf_page * Mediator::pdf_page_for_uuid(Uuid const & uuid, Pdf_document * in_document)
+Pdf_page * Mediator::pdf_page_for_uuid(Uuid const & uuid)
 {
     //to make the code more readable
-    std::map<Uuid, Pdf_page *> loaded = Resources_manager::loaded_pdf_pages;
-    
+    boost::unordered_map<Uuid, Pdf_page *> loaded = Resources_manager::loaded_pdf_pages;
+
     auto e = loaded.find(uuid);
     if(e == loaded.end()) {        
-        Pdf_page * pdf_page = new Pdf_page(in_document);
+        Pdf_page * pdf_page = new Pdf_page();
+        // Pdf_page * pdf_page = Resources_manager::get_new_pdf_page();
+        // std::cerr << "error: requested, sizeof(Pdf_page) = " << sizeof(Pdf_page) << "\n";
+        pdf_page->compute_size();
         pdf_page->uuid = uuid;
-        Resources_manager::loaded_pdf_pages.insert(std::make_pair(uuid,pdf_page));
+        // Resources_manager::loaded_pdf_pages.insert(std::make_pair(uuid,pdf_page));
+        Resources_manager::loaded_pdf_pages[uuid] = pdf_page;
         return pdf_page;
     } else {
-        //integrity check
-        if(e->second->in_document != in_document) {
-            std::cerr << "error: e->second->in_document = " << e->second->in_document << ", in_document = " << in_document << "\n";
-            exit(1);
-        }
         return e->second;
     }
 }
 
-Highlighting * Mediator::highlighting_for_uuid(Uuid const & uuid, Document * in_document)
+Highlighting * Mediator::highlighting_for_uuid(Uuid const & uuid)
 {
     //to make the code more readable
-    std::map<Uuid, Highlighting *> loaded = Resources_manager::loaded_highlightings;
-    
-    auto e = loaded.find(uuid);
+    boost::unordered_map<Uuid, Highlighting *> loaded = Resources_manager::loaded_highlightings; 
+
+    auto e = loaded.find(uuid); 
     if(e == loaded.end()) {
-        Highlighting * highlighting = new Highlighting(in_document);
+        Highlighting * highlighting = new Highlighting();
+        // Highlighting * highlighting = Resources_manager::get_new_highlighting(); 
+        // std::cerr << "error: requested, sizeof(Highlighting) = " << sizeof(Highlighting) << "\n"; 
         highlighting->uuid = uuid;
-        Resources_manager::loaded_highlightings.insert(std::make_pair(uuid,highlighting));
+        Resources_manager::loaded_highlightings[uuid] = highlighting;
         return highlighting;
-    } else {
-        //integrity check
-        if(e->second->in_document != in_document) {
-            std::cerr << "error: e->second->in_document = " << e->second->in_document << ", in_document = " << in_document << "\n";
-            exit(1);
-        }
+    } else {        
         return e->second;
     }    
 }
@@ -71,13 +68,15 @@ Highlighting * Mediator::highlighting_for_uuid(Uuid const & uuid, Document * in_
 Highlighting_component * Mediator::highlighting_component_for_uuid(Uuid const & uuid)
 {
     //to make the code more readable
-    std::map<Uuid, Highlighting_component *> loaded = Resources_manager::loaded_highlighting_components;
+    boost::unordered_map<Uuid, Highlighting_component *> loaded = Resources_manager::loaded_highlighting_components;
     
     auto e = loaded.find(uuid);
     if(e == loaded.end()) {
         Highlighting_component * highlighting_component = new Highlighting_component();
+        // Highlighting_component * highlighting_component = Resources_manager::get_new_highlighting_component();
+        // std::cerr << "error: requested, sizeof(Highlighting_component) = " << sizeof(Highlighting_component) << "\n";
         highlighting_component->uuid = uuid;
-        Resources_manager::loaded_highlighting_components.insert(std::make_pair(uuid,highlighting_component));
+        Resources_manager::loaded_highlighting_components[uuid] = highlighting_component;
         return highlighting_component;
     } else {
         return e->second;

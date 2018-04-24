@@ -9,6 +9,7 @@
 #include "pdf_page.hpp"
 #include "database/resources_manager.hpp"
 #include "database/mediator.hpp"
+#include "timer.hpp"
 
 Pdf_document::Pdf_document(json const & j)
 {
@@ -26,18 +27,16 @@ void Pdf_document::load_all_pages(json const & j)
         return;
     }
     //--------allocating the pages and the highlighting components, putting them into the pages--------
-    unsigned int i_page = 0;
+    // std::cerr << "started loading the pages\n";
     for(auto && j_page : j["pages"]) {
-        if(i_page % 10 == 0) {
-            std::cerr << "loading page i_page = " << i_page << "\n";
-        }
-        i_page++;
         Uuid page_uuid(j_page["uuid"].get<std::string>());
-        Pdf_page * page = Mediator::pdf_page_for_uuid(page_uuid, this);
+        Pdf_page * page = Mediator::pdf_page_for_uuid(page_uuid);
+        page->in_document = this;
         page->index_in_pdf = j_page["index_in_pdf"];
         this->pages.insert(std::make_pair(page_uuid, page));
 
         auto & j_highlighting_components_in_page = j_page["highlighting_components"];
+
         for(auto && j_highlighting_component : j_highlighting_components_in_page) {
             Uuid highlighting_component_uuid(j_highlighting_component.get<std::string>());
             Highlighting_component * highlighting_component = Mediator::highlighting_component_for_uuid(highlighting_component_uuid);
@@ -50,6 +49,7 @@ void Pdf_document::load_all_pages(json const & j)
         page->x1_crop = j_crop["x1"].get<double>(); 
         page->y1_crop = j_crop["y1"].get<double>();
     }
+    // std::cerr << "finished loading the pages\n";
     //--------giving pages the correct number--------
     /*
       Here I am building a linked list. There are more efficient ways but this is probably the easiesy to type.
@@ -57,7 +57,6 @@ void Pdf_document::load_all_pages(json const & j)
       In the .json file for each page there are three pieces of information: its uuid, the uuid of the previous page and the uuid of the next pages.
       The pages can be listed in a generic order (because pages can be moved), this is the reason I find useful to use an std::map
     */
-    std::cerr << "giving pages ordering\n";
     std::map<Uuid,Uuid> map_linked_list_forward;
     std::map<Uuid,Uuid> map_linked_list_backward;
     Uuid first;
@@ -92,8 +91,6 @@ void Pdf_document::load_all_pages(json const & j)
         exit(1);
     }
 
-    std::cerr << "built the maps\n";
-
     //build the linked lists
     std::list<Uuid> linked_list_forward;    
     std::list<Uuid> linked_list_backward;
@@ -124,8 +121,6 @@ void Pdf_document::load_all_pages(json const & j)
             current = &(map_linked_list[*current]);
         }
     };
-
-    std::cerr << "built the linked lists\n";
     
     build_linked_list_from_map(map_linked_list_forward, linked_list_forward, first, last);
     build_linked_list_from_map(map_linked_list_backward, linked_list_backward, last, first);
@@ -148,22 +143,19 @@ void Pdf_document::load_all_pages(json const & j)
         jt++;
         i++;
     }
-
-    std::cerr << "set the page ordering\n";
     
     //--------loading the highlightings--------
-    std::cerr << "started loading the highlightings\n";    
     for(auto && j_highlighting : j["highlightings"]) {
         Uuid highlighting_uuid(j_highlighting["uuid"].get<std::string>());
-        Highlighting * highlighting = Mediator::highlighting_for_uuid(highlighting_uuid,this);
+        Highlighting * highlighting = Mediator::highlighting_for_uuid(highlighting_uuid);
+        highlighting->in_document = this;
         
         highlighting->color = Color::from_string(j_highlighting["color"].get<std::string>());
         highlighting->text = j_highlighting["text"].get<std::string>();
     }
-    std::cerr << "finished loading the highlightings\n";
     
     //--------loading the highlighting components--------
-    std::cerr << "started loading the highlighting components\n";
+    // std::cerr << "started loading the highlighting components\n";
     for(auto && j_highlighting_component : j["highlighting_components"]) {
         Uuid highlighting_component_uuid(j_highlighting_component["uuid"].get<std::string>());
         Uuid parent_highlighting_uuid(j_highlighting_component["parent_highlighting"].get<std::string>());
@@ -172,7 +164,7 @@ void Pdf_document::load_all_pages(json const & j)
         double y0 = j_highlighting_component["y0"].get<double>();
         double y1 = j_highlighting_component["y1"].get<double>();
         Highlighting_component * highlighting_component = Mediator::highlighting_component_for_uuid(highlighting_component_uuid);
-        Highlighting * highlighting = Mediator::highlighting_for_uuid(parent_highlighting_uuid,this);
+        Highlighting * highlighting = Mediator::highlighting_for_uuid(parent_highlighting_uuid);
         highlighting->highlighting_components.push_back(highlighting_component);
         highlighting_component->parent_highlighting = highlighting;
         highlighting_component->x0 = x0;
@@ -180,7 +172,7 @@ void Pdf_document::load_all_pages(json const & j)
         highlighting_component->y0 = y0;
         highlighting_component->y1 = y1;
     }
-    std::cerr << "finished loading the highlighting components\n";
+    // std::cerr << "finished loading the highlighting components\n";
 }
 
 bool Pdf_document::is_valid() const

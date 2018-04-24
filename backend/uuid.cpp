@@ -65,3 +65,9 @@ std::ostream & operator<<(std::ostream & stream, const Uuid & obj)
     stream << obj.uuid_string;
     return stream;
 }
+
+std::size_t hash_value(Uuid const & uuid)
+{
+    boost::hash<std::string> hasher;
+    return hasher(uuid.uuid_string);
+}

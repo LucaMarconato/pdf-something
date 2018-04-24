@@ -10,9 +10,7 @@ using json = nlohmann::json;
 Document * Document::parse(char * file_content)
 {
     // std::cout << "file_content = " << file_content << "\n";
-    std::cerr << "starting parsing json file\n";
     auto j = json::parse(file_content);
-    std::cerr << "finished parsing json file\n";
     
     if(j["format"] == "pdf") {        
         Pdf_document * document = new Pdf_document(j);

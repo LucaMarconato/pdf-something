@@ -2,9 +2,12 @@
 
 #include <iostream>
 
+#include "document.hpp"
+#include "pdf_document.hpp"
+
 //highlighting
 
-Highlighting::Highlighting(Document * in_document) : in_document(in_document) 
+Highlighting::Highlighting()
 {
 
 }

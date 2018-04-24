@@ -2,7 +2,6 @@
 #define DATABASE_H
 
 #include <string>
-#include <map>
 #include <memory>
 
 #include "../uuid.hpp"

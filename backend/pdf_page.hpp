@@ -3,8 +3,6 @@
 
 #include <string>
 #include <list>
-#include <map>
-#include <boost/bimap.hpp>
 
 #include <nlohmann/json.hpp>
 using json = nlohmann::json;
@@ -19,11 +17,12 @@ class Highlighting_component;
 class Pdf_page {
 public:
     Pdf_page();
-    Pdf_page(Pdf_document * in_document);
     Pdf_page(const Pdf_page & obj);
     friend void swap(Pdf_page & obj1, Pdf_page & obj2);
     Pdf_page & operator=(Pdf_page & obj);
+    void compute_size();
     bool is_valid() const;
+    bool operator==(const Pdf_page & obj) const;
     friend std::ostream & operator<<(std::ostream & stream, const Pdf_page & obj);
     
     Pdf_document * in_document = nullptr;
@@ -36,7 +35,6 @@ public:
     double x1_crop = PAGE_MAX_X + 1;
     double y1_crop = PAGE_MAX_Y + 1;
 private:
-    void compute_size();
     void print(std::ostream & stream);
 
     double width = -1;  //real width, in pixels

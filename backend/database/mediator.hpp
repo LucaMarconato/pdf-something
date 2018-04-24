@@ -10,8 +10,8 @@
 class Mediator: Database, Resources_manager {
 public:
     static Document * document_for_uuid(Uuid const & uuid);
-    static Pdf_page * pdf_page_for_uuid(Uuid const & uuid, Pdf_document * in_document);
-    static Highlighting * highlighting_for_uuid(Uuid const & uuid, Document * in_document);
+    static Pdf_page * pdf_page_for_uuid(Uuid const & uuid);
+    static Highlighting * highlighting_for_uuid(Uuid const & uuid);
     static Highlighting_component * highlighting_component_for_uuid(Uuid const & uuid);
 
     static void load_latest_windows_configuration();

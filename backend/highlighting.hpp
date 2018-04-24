@@ -5,10 +5,11 @@
 #include <list>
 
 #include "uuid.hpp"
-#include "document.hpp"
-#include "pdf_document.hpp"
 #include "color.hpp"
 #include "constants.hpp"
+
+class Document;
+class Pdf_page;
 
 //for the moment I am only implementing rectangular highlightings
 
@@ -17,7 +18,7 @@ class Highlighting_component;
 class Highlighting
 {
 public:
-    Highlighting(Document * in_document);
+    Highlighting();
     bool is_valid() const;
     friend std::ostream & operator<<(std::ostream & stream, const Highlighting & obj);
 

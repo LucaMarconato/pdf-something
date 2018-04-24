@@ -1,4 +1,3 @@
-
 #ifndef CONSTANTS_H
 #define CONSTANTS_H
 
@@ -61,5 +60,7 @@
         	*(int *)"crash!" = true;\
         }\
     } while(0)
+
+//--------------------------------
 
 #endif //CONSTANTS_H

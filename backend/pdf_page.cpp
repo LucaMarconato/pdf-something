@@ -19,11 +19,6 @@ Pdf_page::Pdf_page()
     
 }
 
-Pdf_page::Pdf_page(Pdf_document * in_document) : in_document(in_document)
-{
-    this->compute_size();
-}
-
 Pdf_page::Pdf_page(const Pdf_page & obj)
 {
     this->in_document = obj.in_document;
@@ -31,6 +26,11 @@ Pdf_page::Pdf_page(const Pdf_page & obj)
     this->height = obj.height;
     this->index = obj.index;
     this->index_in_pdf = obj.index_in_pdf;
+    this->x0_crop = obj.x0_crop;
+    this->y0_crop = obj.y0_crop;
+    this->x1_crop = obj.x1_crop;
+    this->y1_crop = obj.y1_crop;
+    this->highlighting_components = obj.highlighting_components;
 }
 
 Pdf_page & Pdf_page::operator=(Pdf_page & obj)
@@ -47,6 +47,11 @@ void swap(Pdf_page & obj1, Pdf_page & obj2)
     std::swap(obj1.height,obj2.height);
     std::swap(obj1.index,obj2.index);
     std::swap(obj1.index_in_pdf,obj2.index_in_pdf);
+    std::swap(obj1.x0_crop,obj2.x0_crop);
+    std::swap(obj1.y0_crop,obj2.y0_crop);
+    std::swap(obj1.x1_crop,obj2.x1_crop);
+    std::swap(obj1.y1_crop,obj2.y1_crop);
+    std::swap(obj1.highlighting_components,obj2.highlighting_components);
 }
 
 void Pdf_page::compute_size()
@@ -60,17 +65,32 @@ inline bool Pdf_page::is_valid() const
 {
     bool is_valid = true;
     is_valid = is_valid && this->uuid.is_valid();
+    is_valid = is_valid && this->in_document != nullptr;
     is_valid = is_valid && VALID_PAGE_WIDTH(this->width);
     is_valid = is_valid && VALID_PAGE_HEIGHT(this->height);
     is_valid = is_valid && VALID_PAGE_INDEX(this->index);
     is_valid = is_valid && VALID_PAGE_INDEX(this->index_in_pdf);
     is_valid = is_valid && VALID_PAGE_COORDINATES(this->x0_crop, this->y0_crop, this->x1_crop, this->y1_crop);
-    is_valid = is_valid && this->in_document != nullptr;
 
     if(!is_valid) {
         std::cerr << "error: Pdf_page, is_valid = " << is_valid << "\n";
     }
     return is_valid;
+}
+
+bool Pdf_page::operator==(const Pdf_page & obj) const
+{
+    bool is_equal = true;
+    is_equal = is_equal && this->in_document == obj.in_document;
+    is_equal = is_equal && this->uuid == obj.uuid;
+    is_equal = is_equal && this->width == obj.width;
+    is_equal = is_equal && this->height == obj.height;
+    is_equal = is_equal && this->index == obj.index;
+    is_equal = is_equal && this->x0_crop == obj.x0_crop;
+    is_equal = is_equal && this->y0_crop == obj.y0_crop;
+    is_equal = is_equal && this->x1_crop == obj.x1_crop;
+    is_equal = is_equal && this->y1_crop == obj.y1_crop;
+    return is_equal;
 }
 
 std::ostream & operator<<(std::ostream & stream, const Pdf_page & obj)

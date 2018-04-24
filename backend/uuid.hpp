@@ -3,7 +3,7 @@
 
 #include <string>
 #include <vector>
-
+#include <boost/functional/hash.hpp>
 
 /*
   this class provide an astraction layer in order to allow us to choose the preferred method for dealing with uuids. Here I am using boost for doing that
@@ -34,5 +34,16 @@ private:
 };
 
 std::ostream & operator<<(std::ostream & stream, const Uuid & obj);
+
+std::size_t hash_value(Uuid const & uuid);
+
+namespace std {
+    template <>
+    struct hash<Uuid> {
+        std::size_t operator()(const Uuid & uuid) const noexcept {
+            return std::hash<std::string>{}(uuid.uuid_string);
+        }
+    };   
+}
 
 #endif //UUID_H

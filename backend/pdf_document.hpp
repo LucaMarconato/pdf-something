@@ -3,7 +3,8 @@
 
 #include <string>
 #include <list>
-#include <map>
+#include <boost/unordered_map.hpp>
+#include <unordered_map>
 #include <boost/bimap.hpp>
 
 #include <nlohmann/json.hpp>
@@ -12,6 +13,8 @@ using json = nlohmann::json;
 
 #include "document.hpp"
 #include "uuid.hpp"
+// for the unordered_map hashes
+#include "database/resources_manager.hpp"
 
 class Pdf_page;
 
@@ -24,7 +27,7 @@ public:
     void print(std::ostream & stream) const;
     ~Pdf_document();
 private:
-    std::map<Uuid, std::shared_ptr<Pdf_page>> pages;
+    std::unordered_map<Uuid, Pdf_page *> pages;
     boost::bimap<Uuid, int> numbering;
     
 };

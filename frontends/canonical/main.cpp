@@ -28,6 +28,8 @@ int main(int argc, char * argv[])
       The cursor which was used (pen/rubber/highlighter/etc) is not recovered from the last section and it is shared among windows/split screen layouts.
       This because otherwise the user could get confused
     */
+    // the code should work even without this line, currently it isn't
+    // Resources_manager::initialize_resources_caching();
     Mediator::load_latest_windows_configuration();
     // std::cout << "Windows_configuration\n";
     // Windows_configuration::print(std::cout);
