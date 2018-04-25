@@ -9,6 +9,7 @@
 // this class is responsible for mediating with the database (class Database) and with the collection of loaded resources (class Resources_manager) in order to return the results of predefined queries
 class Mediator: Database, Resources_manager {
 public:
+    Mediator() = delete;
     /*
       These methods check if the resource associated to the uuid is already in memory.
       If it is, they return it, if not, they load it in memory from the Database and then they return it.
@@ -26,8 +27,6 @@ public:
     static bool highlighting_component_is_loaded(Uuid & uuid);
 
     static Uuid get_latest_opened_pdf();
-
-    Mediator() = delete;
 };
 
 #endif // MEDIATOR_H

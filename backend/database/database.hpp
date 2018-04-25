@@ -10,6 +10,9 @@
 #include "../highlighting.hpp"
 
 class Database {
+public:
+    Database() = delete;
+    
 protected:
     /*
       The documents (.pdf, slides, etc.) are associated with an Uuid.

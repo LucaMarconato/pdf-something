@@ -24,7 +24,7 @@ class Highlighting_component:
 
 class Highlighting:
 	def __init__(self, uuid, defines_a_section, caption, marked_as_wrong, environment):
-		self.uuid = uuids
+		self.uuid = uuid
 		self.defines_a_section = defines_a_section
 		self.caption = caption
 		self.marked_as_wrong = marked_as_wrong
@@ -55,6 +55,14 @@ class Document:
 		x2 = t[2]
 		y1 = t[3]
 		y2 = t[4]
+		if x1 > x2:
+			temp = x1
+			x1 = x2
+			x2 = temp
+		if y1 > y2:
+			temp = y1
+			y1 = y2
+			y2 = temp
 		defines_a_section = bool(t[5])
 		caption = str('' if t[6] == '_______________' else t[6]).encode('utf-8').decode('utf-8')
 		marked_as_wrong = bool(t[7])
@@ -63,6 +71,8 @@ class Document:
 			environment = 'black'
 		elif environment == 'subsection':
 			environment = 'gray'
+		elif environment == 'text':
+			environment = 'transparent'
 		highlighting_component = Highlighting_component(highlighting_uuid, x1, y1, x2, y2)
 		if not highlighting_uuid in self.highlightings:
 			highlighting = Highlighting(highlighting_uuid,defines_a_section,caption,marked_as_wrong,environment)
@@ -76,7 +86,7 @@ def validate_json_string(s):
 
 # I am aware that I could have wrote this quickly with the json module, next time I will be lazier and use that
 def convert_document(document):
-	output_dir = 'documents'
+	output_dir = '../frontends/canonical/data'
 	if not os.path.exists(output_dir):
 		os.makedirs(output_dir)
 	if not os.path.exists(f'{output_dir}/{document.uuid}'):
@@ -185,8 +195,10 @@ def convert_document(document):
 
 def open_database():
 	global db_connection, db
-	db_connection=sqlite3.connect('Highlightings.sqlite')
-	db=db_connection.cursor()
+	user_dir = os.path.expanduser('~')
+	db_dir = user_dir + '/Library/Application Support/easyLyceum'
+	db_connection = sqlite3.connect(db_dir + '/Highlightings.sqlite')
+	db = db_connection.cursor()
 
 def query(string):
 	return db.execute(string).fetchall()
@@ -267,14 +279,24 @@ print(f'overwrite_pdf = {overwrite_pdf}',
 	  'overwrite_pdf = True:      overwriting the .pdf already present in the database, but overwriting the easyLyceum informations',
 	  sep = '\n')
 print('')
-document_names = ['Luca Marconato - Appunti di statistica II [Pace]']
+document_names = ['Luca Marconato - Appunti di statistica II [Pace]',
+				  'geometria superiore modulo I',
+				  'geometria superiore modulo II',
+				  'weber',
+				  'gorni',
+				  'Patrick Gon - Appunti di statistica I',
+				  'vidoni__Applied statistics and data analysis (labs theory)',
+				  'vidoni__Applied statistics and data analysis (slides)',
+				  'slides of algorithms for bioinformatics']
 documents = []
-for document_name in document_names:	
+for document_name in document_names:
+	print(f'searching \'{document_name}\'')
 	t = tuple_from_document_name(document_name)
-	if t != []:
+	if t != -1:
 		document = parse_document(t)
 		if document != -1:
 			documents.append(document)
+	print('')
 
 if len(documents) > 0:
 	if len(documents) == 1:

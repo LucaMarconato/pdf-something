@@ -17,6 +17,7 @@ int main(int argc, char * argv[])
                   -window split screen (a grid inside the window, 1x2 in the canonical frontend, class Window_split_screen), for each grid position in the grid (class Window_split_screen_element):
                       -the pdf which was opened
                       -page it was opened
+                      -the grid_layout (class Grid_layout) which was used for displaying the document. The grid layout can be up to 6x6, for instance if viewing slides, one may find convenient to adopt a 3x4 or 4x5 grid layout
                       -crop information for each page (class Page)
                       -highlightings (class Highlighting)
                           highlightings can be semitransparent (normal) or opaque
@@ -34,21 +35,19 @@ int main(int argc, char * argv[])
       You can ignore it for the moment, look at it when you are familiar with the code.
       Its purpose is to handle the cache better to gain better performance.
     */
-    Resources_manager::initialize_resources_caching();
+    // Resources_manager::initialize_resources_caching();
 
     /*
       Mediator is a "static" class which is used by the frontend to get items from the database (class Database) or from the collection of already loaded elements (class Resources_manager).
     */
     Mediator::load_latest_windows_configuration();
-    std::cout << "Windows_configuration\n";
+    // std::cout << "Windows_configuration\n";
     /* 
        The output uses HTML tags for displaying indentations correctly. 
-       To display it just use "make run", which calls (as you can see in CMakeLists.txt), the following:
-       "run ./canonical-frontend > output.html && bash put_into_html_body.sh output.html"
-
-       There is no way to overload << for a "static" class, this is the reason why I declared the function print
+       To display it just use "make run", which calls (as you can see in CMakeLists.txt), the script "run.sh" in the current folder.
     */
     // Windows_configuration::print(std::cout);
     
     return 0;
 }
+

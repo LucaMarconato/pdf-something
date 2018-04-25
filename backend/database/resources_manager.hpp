@@ -11,20 +11,22 @@
 
 class Resources_manager {
 public:
+    Resources_manager() = delete;
     /*
       If using the class Asynchronous_loader, then this method must be called as soon as possible, when the application opens.
       This function initialize some singleton template classes making them running a threads in background which loads some resources in memory.
     */
     static void initialize_resources_caching();
+    
 protected:
     /*
       Here are stored the relevant resources, the key of the maps is a 128bit representation of an UUID (a struct), since using the class Uuid in the key makes the code slower. The compact uuid of an Uuid object is built when the UUID is created and it is accessible via Uuid.compact_uuid.
       See also: https://github.com/LucaMarconato/pdf-something/issues/7
     */
-    static std::unordered_map<Compact_uuid, Document *> loaded_documents;
-    static std::unordered_map<Compact_uuid, Pdf_page *> loaded_pdf_pages;
-    static std::unordered_map<Compact_uuid, Highlighting *> loaded_highlightings;
-    static std::unordered_map<Compact_uuid, Highlighting_component *> loaded_highlighting_components;
+    static std::unordered_map<Uuid, Document *> loaded_documents;
+    static std::unordered_map<Uuid, Pdf_page *> loaded_pdf_pages;
+    static std::unordered_map<Uuid, Highlighting *> loaded_highlightings;
+    static std::unordered_map<Uuid, Highlighting_component *> loaded_highlighting_components;
 
     /*
       These function allocate the desired object. 

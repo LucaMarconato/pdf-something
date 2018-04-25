@@ -52,10 +52,10 @@ bool Highlighting_component::is_valid() const
 {
     bool is_valid = true;
 
-    is_valid = is_valid && VALID_PAGE_COORDINATES(x0,y0,x1,y1);
-    is_valid = is_valid && this->uuid.is_valid();
-    is_valid = is_valid && this->parent_highlighting != nullptr;
-    is_valid = is_valid && this->in_page != nullptr;
+    is_valid = is_valid && VALID_PAGE_COORDINATES(x0,y0,x1,y1); MY_ASSERT(is_valid);
+    is_valid = is_valid && this->uuid.is_valid(); MY_ASSERT(is_valid);
+    is_valid = is_valid && this->parent_highlighting != nullptr; MY_ASSERT(is_valid);
+    is_valid = is_valid && this->in_page != nullptr; MY_ASSERT(is_valid);
 
     if(!is_valid) {
         std::cerr << "error: highlighting component is not valid\n";
@@ -80,3 +80,4 @@ std::ostream & operator <<(std::ostream & stream, const Highlighting_component &
     }
     return stream;
 }
+
