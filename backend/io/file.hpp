@@ -6,15 +6,18 @@
 #include "../uuid.hpp"
 
 /*
-  Each operating system as his own way of dealing with files, expecially mobile systems. 
-  This class is used as a protocol to handle basic operations with files (we do not need something as complex as std::fstream), and it will be implemented by each frontend.
+  std::fstream works with iOS, according that the frontend provides the path the application is allowed to write into.
+  In fact, in iOS you cannot write in the application bundle but only to a specific path.
+  I wrote this class as an interface to be implemented in each frontend because I did not belived that you could use std::fstream in iOS, but since I discovered that it works, this class, as it is, is useless.
+  One thing that this class should do is to tell the backend the path it is allowed to write.
+  
+  Anyway, this class is really simple, and if we will have some problems in dealing with files with some OS we can rely on this.
 */
 
 class File {
 public:
-  //for how the code is structured we need only binary read/write, because we always write as char *
+    // for how the code is structured we need only binary read/write, because we always write as char *
     enum Opening_mode {
-        // READ, WRITE, APPEND, READ_BINARY, WRITE_BINARY, APPEND_BINARY;
         READ_BINARY, WRITE_BINARY, APPEND_BINARY
     };
     
@@ -25,8 +28,10 @@ public:
     void close();
     static bool exists(std::string path);
     unsigned long long size();
-    //we are not returing the content but we are storing it in this class so we are sure that its memory is freed correctly when the destructor is called
-    //this prevents memory leak but we have to be careful to not have the destructor of File called to early
+    /*
+      The memory is allocated in the frontend implementation of this file and will be freed by the caller of the function read_all_content()
+      append_null is used if one wants to use the read chars as a C string and not as a raw array of bytes
+    */
     void read_all_content(bool append_null, char ** buffer);
     void write(char * to_write, int bytes);
     void write(std::string to_write);
@@ -38,7 +43,7 @@ private:
     /*
       When the constructor is called, the frontend must create an instance of a file handler (e.g. std::fstream, FILE *, ...). This object cannot be stored inside the class because it can be something exotic (like what happen in iOS). 
       A way to make the frontend able to store it is to create a dictionary, indexed by an UUID, that stores the file handler.
-      The resource will then be freed by the frontend when the destructor of this class is called.
+      The resource must then be freed by the frontend when the destructor of this class is called.
     */    
     Uuid uuid_of_frontend_resource;
 };

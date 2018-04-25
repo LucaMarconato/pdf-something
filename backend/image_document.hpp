@@ -1,6 +1,10 @@
 #ifndef IMAGE_DOCUMENT_H
 #define IMAGE_DOCUMENT_H
 
+/*
+  This file is unused and it will be unused for a long time, it is just a sketch for showing the polymorphism of Document.
+*/
+
 #include <iostream>
 
 #include "document.hpp"

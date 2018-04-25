@@ -79,7 +79,7 @@ public:
     std::vector<std::thread *> threads;
     std::mutex m;
     std::mutex loader_running_mutex;
-    std::atomic<bool> loader_running = false;
+    std::atomic<bool> loader_running;
     std::atomic<bool> loader_running_for_the_first_time;
     // when a buffer is full it is filled again
     T * buffers [2][buffer_size];
@@ -92,6 +92,7 @@ private:
         std::cerr << "Asynchronous_loader(): sizeof(T) = " << sizeof(T) << ", buffer_size = " << buffer_size << "\n";
         ensure_only_one_is_instanciated<T>();
         this->loader_running_for_the_first_time = true;
+        this->loader_running = false;
         std::thread * t = new std::thread(&Asynchronous_loader::loader,this);
         this->threads.push_back(t);
     }

@@ -51,7 +51,6 @@
 		FA6E64ED20800AD700BAC71A /* backend.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = backend.a; path = ../../backend/backend.a; sourceTree = "<group>"; };
 		FA74A8FF20800F8400351CDB /* iOS-frontend-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "iOS-frontend-Bridging-Header.h"; sourceTree = "<group>"; };
 		FA74A90020800F8400351CDB /* wrapper.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = wrapper.cpp; path = "../../../macOS/macOS-frontend/Bridge/wrapper.cpp"; sourceTree = "<group>"; };
-		FA74A90220800FC600351CDB /* backend.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = backend.hpp; path = ../../../../backend/backend.hpp; sourceTree = "<group>"; };
 		FA74A90320800FDC00351CDB /* libbackend.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libbackend.a; path = ../../backend/libbackend.a; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -145,7 +144,6 @@
 		FA6E64EF20800AFD00BAC71A /* Bridge */ = {
 			isa = PBXGroup;
 			children = (
-				FA74A90220800FC600351CDB /* backend.hpp */,
 				FA74A90020800F8400351CDB /* wrapper.cpp */,
 				FA74A8FF20800F8400351CDB /* iOS-frontend-Bridging-Header.h */,
 			);
@@ -459,15 +457,26 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_CXX_LANGUAGE_STANDARD = "c++17";
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = E3FASCL8AR;
+				HEADER_SEARCH_PATHS = (
+					../../dependencies,
+					../../backend,
+					/usr/local/Cellar/boost/1.66.0/include,
+				);
 				INFOPLIST_FILE = "iOS-frontend/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				LIBRARY_SEARCH_PATHS = ../../backend;
+				LIBRARY_SEARCH_PATHS = (
+					../../backend,
+					../../dependencies,
+					/usr/local/Cellar/boost/1.66.0/lib,
+				);
+				OTHER_CPLUSPLUSFLAGS = "$(OTHER_CFLAGS)";
 				PRODUCT_BUNDLE_IDENTIFIER = "ilma.iOS-frontend";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "iOS-frontend/Bridge/iOS-frontend-Bridging-Header.h";
@@ -481,15 +490,26 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_CXX_LANGUAGE_STANDARD = "c++17";
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = E3FASCL8AR;
+				HEADER_SEARCH_PATHS = (
+					../../dependencies,
+					../../backend,
+					/usr/local/Cellar/boost/1.66.0/include,
+				);
 				INFOPLIST_FILE = "iOS-frontend/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				LIBRARY_SEARCH_PATHS = ../../backend;
+				LIBRARY_SEARCH_PATHS = (
+					../../backend,
+					../../dependencies,
+					/usr/local/Cellar/boost/1.66.0/lib,
+				);
+				OTHER_CPLUSPLUSFLAGS = "$(OTHER_CFLAGS)";
 				PRODUCT_BUNDLE_IDENTIFIER = "ilma.iOS-frontend";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "iOS-frontend/Bridge/iOS-frontend-Bridging-Header.h";

@@ -4,6 +4,8 @@
 #include <iomanip> //for put_time()
 #include <iostream>
 
+Datetime::Datetime() {}
+
 Datetime::Datetime(std::string datetime)
 {
     //the format is "yyyy-mm-dd hh:mm:ss"
@@ -11,13 +13,9 @@ Datetime::Datetime(std::string datetime)
     std::istringstream ss(datetime);
     ss >> std::get_time(&tm, "%F %T");
     this->time = mktime(&tm);
-    //TODO: check if the conversion was successful before claiming that this object is initalized
-    this->initialized = true;
-}
-
-Datetime::Datetime()
-{
-    
+    if(this->time == -1) {
+        std::cerr << "error: mktime() failed the conversion\n";
+    }
 }
 
 Datetime Datetime::now()
@@ -25,16 +23,19 @@ Datetime Datetime::now()
     Datetime datetime;
     std::chrono::system_clock::time_point now = std::chrono::system_clock::now();
     datetime.time = std::chrono::system_clock::to_time_t(now);
-    datetime.initialized = true;
     return datetime;
 }
 
 bool Datetime::is_valid() const
 {
-    if(!this->initialized) {
-        std::cerr << "warning: uninitialized Datetime, this->initialized = " << this->initialized << "\n";
+    bool is_valid = true;
+    is_valid = is_valid && this->time != -1;
+
+    if(!is_valid) {
+        std::cerr << "error: is_valid = -1\n";
+        exit(1);
     }
-    return this->initialized;
+    return is_valid;
 }
 
 std::string Datetime::to_string() const
@@ -46,7 +47,7 @@ std::string Datetime::to_string() const
 
 std::ostream & operator<<(std::ostream & stream, const Datetime & obj)
 {
-    if(!obj.initialized) {
+    if(!obj.is_valid()) {
         stream << "<uninitalized datetime>";
     } else {
         stream << obj.to_string();

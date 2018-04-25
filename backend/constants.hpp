@@ -1,7 +1,7 @@
 #ifndef CONSTANTS_H
 #define CONSTANTS_H
 
-//these constants are used to be sure that the above values cannot be excessively large
+// when cropping or when adding highlighting we will not exceed this relative coordinates
 #define PAGE_EXTRA_BORDER 2.0
 #define PAGE_MIN_X 0.0 - PAGE_EXTRA_BORDER
 #define PAGE_MIN_Y 0.0 - PAGE_EXTRA_BORDER
@@ -18,11 +18,11 @@
 
 //--------------------------------
 
-//in pixels
+// in pixels
 #define PAGE_MAX_WIDTH 150000
 #define PAGE_MAX_HEIGHT 150000
 
-//maximum number of page for a document
+// maximum number of page for a document
 #define PAGE_MAX_INDEX 100000
 
 #define VALID_PAGE_WIDTH(width) ((width) > 0 && (width) < (PAGE_MAX_WIDTH))
@@ -33,8 +33,8 @@
 
 #define WINDOW_MIN_X 0
 #define WINDOW_MIN_Y 0
-#define WINDOW_MAX_X 15360 //16K screen
-#define WINDOW_MAX_Y 8640 //16K screen
+#define WINDOW_MAX_X 15360 // 16K screen
+#define WINDOW_MAX_Y 8640 // 16K screen
 
 #define VALID_WINDOW_SIZE(x0,y0,x1,y1) \
                ((x0) < (x1) && \
@@ -46,12 +46,20 @@
 
 //--------------------------------
 
+// some pdf viewers show a single page for a document, or maybe two or three, we show this huge grid
 #define GRID_LAYOUT_MAX_ROWS 6
 #define GRID_LAYOUT_MAX_COLUMNS 6
 
 #define VALID_GRID_LAYOUT(rows,columns) ((rows) > 0 && (rows) <= (GRID_LAYOUT_MAX_ROWS) && (columns) > 0 && (columns) <= (GRID_LAYOUT_MAX_COLUMNS))
 
 //--------------------------------
+
+/*
+  This function is usefull in Visual Studio Code because when the code crash in this way we are able to navigate in the stack trace and see what happened before the crash.
+  We cannot do it with the assertion of <cassert>
+
+  One case in which this macro was useful was for instance in is_valid() inside highlighting.cpp, to understand which was the test making the variable is_valid false.
+*/
 
 #define MY_ASSERT(expression) \
     do {\

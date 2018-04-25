@@ -6,33 +6,17 @@
 #include <boost/uuid/uuid_generators.hpp> //generate uuid
 #include <boost/uuid/uuid_io.hpp> //streaming for uuids
 
-
-bool operator==(const Compact_uuid & lhs, const Compact_uuid & rhs)
-{
-    for(int i = 0; i < 16; i++) {
-        if(lhs.data[i] != rhs.data[i]) {
-            return false;
-        }
-    }
-    return true;
-}
-
-Uuid::Uuid()
-{
-    this->empty_uuid = true;
-}
+Uuid::Uuid() {}
 
 Uuid::Uuid(boost::uuids::uuid boost_uuid)
 {
     this->boost_uuid = boost_uuid;
-    memcpy(this->compact_uuid.data,boost_uuid.data,16);
     this->empty_uuid = false;
 }
 
 Uuid::Uuid(std::string uuid_string)
 {
     this->boost_uuid = boost::lexical_cast<boost::uuids::uuid>(uuid_string);
-    memcpy(this->compact_uuid.data,boost_uuid.data,16);
     this->empty_uuid = false;
 }
 
@@ -64,7 +48,7 @@ std::string Uuid::to_string() const
 
 bool Uuid::operator==(const Uuid & u) const
 {
-    return this->compact_uuid == u.compact_uuid;
+    return this->boost_uuid == u.boost_uuid;
 }
 
 bool Uuid::operator!=(const Uuid & u) const
@@ -74,15 +58,7 @@ bool Uuid::operator!=(const Uuid & u) const
 
 bool operator<(Uuid const & lhs, Uuid const & rhs)
 {
-    for(int i = 0; i < 16; i++) {
-        if(lhs.compact_uuid.data[i] < rhs.compact_uuid.data[i]) {
-            return true;
-        } else if(lhs.compact_uuid.data[i] > rhs.compact_uuid.data[i]) {
-            return false;
-        }
-    }
-    //the uuids are equals
-    return false;
+    return lhs.boost_uuid < rhs.boost_uuid;
 }
 
 std::ostream & operator<<(std::ostream & stream, const Uuid & obj)

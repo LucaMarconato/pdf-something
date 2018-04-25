@@ -24,17 +24,7 @@ bool File::open(std::string path, Opening_mode opening_mode)
     this->file_path = path;
     this->uuid_of_frontend_resource = uuid;
     this->opening_mode = opening_mode;
-    //I do not remember the correct syntax in C++
     switch(this->opening_mode) {
-    // case File::READ:
-    //     file.open(path, std::ios::in);
-    //     break;
-    // case File::WRITE:
-    //     file.open(path, std::ios::out);
-    //     break;
-    // case File::APPEND:
-    //     file.open(path, std::ios::app);
-    //     break;
     case File::READ_BINARY:
         file->open(path, std::ios::in | std::ios::binary);
         break;
@@ -50,12 +40,11 @@ bool File::open(std::string path, Opening_mode opening_mode)
         exit(1);
     }
     if(!file->is_open()) {
-        delete file;
         std::cerr << "error: cannot open file, path = " << path << ", opening_mode = " << this->opening_mode << "\n";
+        delete file;
         return false;
     }
     ::fstreams[uuid] = file;
-    // ::fstreams.insert(std::make_pair(uuid,file));    
     this->is_open = true;
     return true;
 }
@@ -69,22 +58,23 @@ void File::close()
 {
     
     if(!this->is_open) {
-        //if all is correct the destructor was already called so we can ignore this call
+        // this means that the destructor was already called, so we can ignore this call
         return;
     }
-    delete ::fstreams[this->uuid_of_frontend_resource];
+
     auto e = ::fstreams.find(this->uuid_of_frontend_resource);
     if(e == ::fstreams.end()) {
         std::cerr << "error: cannot find frontend resource, this->uuid_of_frontend_resource = " << this->uuid_of_frontend_resource << "\n";
         exit(1);
     }
+    delete ::fstreams[this->uuid_of_frontend_resource];
     ::fstreams.erase(this->uuid_of_frontend_resource);
     this->is_open = false;
 }
 
 bool File::exists(std::string path)
 {
-    //it is not the same thing, but for our case it will work in the canonical backend
+    // here we are not really checking if a file exists but if it can be opened, anyway for our case it will work
     std::ifstream file(path);
     return(file.is_open());
 }
@@ -102,9 +92,14 @@ unsigned long long File::size()
 
 void File::read_all_content(bool append_null, char ** buffer)
 {
+    if(this->opening_mode != File::READ_BINARY) {
+        std::cerr << "error: this->opening_mode = " << this->opening_mode << "\n";
+        exit(1);
+    }
     std::fstream * file = ::fstreams[this->uuid_of_frontend_resource];
     if(*buffer != nullptr) {
-        std::cerr << "warning: *buffer != nullptr\n";
+        std::cerr << "error: *buffer != nullptr\n";
+        exit(1);
     }
     unsigned long long file_size = this->size();
     *buffer = new char [file_size + (append_null ? 1 : 0)];
@@ -117,12 +112,20 @@ void File::read_all_content(bool append_null, char ** buffer)
 
 void File::write(char * to_write, int bytes)
 {
+    if(this->opening_mode != File::WRITE_BINARY && this->opening_mode != File::APPEND_BINARY) {
+        std::cerr << "error: this->opening_mode = " << this->opening_mode << "\n";
+        exit(1);
+    }    
     std::fstream * file = ::fstreams[this->uuid_of_frontend_resource];
     file->write(to_write, bytes);
 }
 
 void File::write(std::string to_write)
 {
+    if(this->opening_mode != File::WRITE_BINARY && this->opening_mode != File::APPEND_BINARY) {
+        std::cerr << "error: this->opening_mode = " << this->opening_mode << "\n";
+        exit(1);
+    }        
     this->write(const_cast<char *>(to_write.c_str()), to_write.length()+1);
 }
 

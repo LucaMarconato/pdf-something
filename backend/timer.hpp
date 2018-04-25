@@ -4,7 +4,7 @@
 #include <ctime>
 #include <iostream>
 
-// for benchmarking, this class is tremendously not thread safe
+// for benchmarking, this class is tremendously not thread-safe
 
 extern clock_t my_time;
 
