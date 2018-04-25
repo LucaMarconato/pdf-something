@@ -1,11 +1,14 @@
 #include <window_split_screen.hpp>
 
+/*
+  Here we supports only 1 row and 2 columns.
+  In an iPad we may choose to support a 1x2 or 2x1 split screen layout depending on the orientation of the screen, i.e. vertical or landscape.
+*/
+
 unsigned int Window_split_screen::max_rows() const {
-    //this is only when testing, we need to return a smaller number 
     return 1;
 }
 
 unsigned int Window_split_screen::max_columns() const {
-    //this is only when testing, we need to return a smaller number 
     return 2;
 }

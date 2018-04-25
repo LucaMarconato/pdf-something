@@ -26,7 +26,7 @@ char * Database::read_document(Uuid const & uuid)
 char * Database::read_latest_windows_configuration()
 {
     File file;
-    std::string file_path = "data/latest.json";
+    std::string file_path = "data/latest_bigger.json";
     file.open(file_path, File::READ_BINARY);
     if(!file.is_open) {
         std::cerr << "error: unable to locate the latest windows configuration file\n";

@@ -1,92 +1,92 @@
 [
 {
   "directory": "/Users/macbook/programming/_projects/pdf-something/backend",
-  "command": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++    -I/Users/macbook/programming/_projects/pdf-something/backend/../dependencies -I/Users/macbook/programming/_projects/pdf-something/backend  -O3 -DNDEBUG   -std=c++17 -O2 -o CMakeFiles/libbackend.dir/color.cpp.o -c /Users/macbook/programming/_projects/pdf-something/backend/color.cpp",
+  "command": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++    -I/Users/macbook/programming/_projects/pdf-something/backend/../dependencies -I/Users/macbook/programming/_projects/pdf-something/backend  -O3 -DNDEBUG   -std=c++17 -Ofast -o CMakeFiles/libbackend.dir/color.cpp.o -c /Users/macbook/programming/_projects/pdf-something/backend/color.cpp",
   "file": "/Users/macbook/programming/_projects/pdf-something/backend/color.cpp"
 },
 {
   "directory": "/Users/macbook/programming/_projects/pdf-something/backend",
-  "command": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++    -I/Users/macbook/programming/_projects/pdf-something/backend/../dependencies -I/Users/macbook/programming/_projects/pdf-something/backend  -O3 -DNDEBUG   -std=c++17 -O2 -o CMakeFiles/libbackend.dir/datetime.cpp.o -c /Users/macbook/programming/_projects/pdf-something/backend/datetime.cpp",
+  "command": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++    -I/Users/macbook/programming/_projects/pdf-something/backend/../dependencies -I/Users/macbook/programming/_projects/pdf-something/backend  -O3 -DNDEBUG   -std=c++17 -Ofast -o CMakeFiles/libbackend.dir/datetime.cpp.o -c /Users/macbook/programming/_projects/pdf-something/backend/datetime.cpp",
   "file": "/Users/macbook/programming/_projects/pdf-something/backend/datetime.cpp"
 },
 {
   "directory": "/Users/macbook/programming/_projects/pdf-something/backend",
-  "command": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++    -I/Users/macbook/programming/_projects/pdf-something/backend/../dependencies -I/Users/macbook/programming/_projects/pdf-something/backend  -O3 -DNDEBUG   -std=c++17 -O2 -o CMakeFiles/libbackend.dir/document.cpp.o -c /Users/macbook/programming/_projects/pdf-something/backend/document.cpp",
+  "command": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++    -I/Users/macbook/programming/_projects/pdf-something/backend/../dependencies -I/Users/macbook/programming/_projects/pdf-something/backend  -O3 -DNDEBUG   -std=c++17 -Ofast -o CMakeFiles/libbackend.dir/document.cpp.o -c /Users/macbook/programming/_projects/pdf-something/backend/document.cpp",
   "file": "/Users/macbook/programming/_projects/pdf-something/backend/document.cpp"
 },
 {
   "directory": "/Users/macbook/programming/_projects/pdf-something/backend",
-  "command": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++    -I/Users/macbook/programming/_projects/pdf-something/backend/../dependencies -I/Users/macbook/programming/_projects/pdf-something/backend  -O3 -DNDEBUG   -std=c++17 -O2 -o CMakeFiles/libbackend.dir/grid_layout.cpp.o -c /Users/macbook/programming/_projects/pdf-something/backend/grid_layout.cpp",
+  "command": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++    -I/Users/macbook/programming/_projects/pdf-something/backend/../dependencies -I/Users/macbook/programming/_projects/pdf-something/backend  -O3 -DNDEBUG   -std=c++17 -Ofast -o CMakeFiles/libbackend.dir/grid_layout.cpp.o -c /Users/macbook/programming/_projects/pdf-something/backend/grid_layout.cpp",
   "file": "/Users/macbook/programming/_projects/pdf-something/backend/grid_layout.cpp"
 },
 {
   "directory": "/Users/macbook/programming/_projects/pdf-something/backend",
-  "command": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++    -I/Users/macbook/programming/_projects/pdf-something/backend/../dependencies -I/Users/macbook/programming/_projects/pdf-something/backend  -O3 -DNDEBUG   -std=c++17 -O2 -o CMakeFiles/libbackend.dir/highlighting.cpp.o -c /Users/macbook/programming/_projects/pdf-something/backend/highlighting.cpp",
+  "command": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++    -I/Users/macbook/programming/_projects/pdf-something/backend/../dependencies -I/Users/macbook/programming/_projects/pdf-something/backend  -O3 -DNDEBUG   -std=c++17 -Ofast -o CMakeFiles/libbackend.dir/highlighting.cpp.o -c /Users/macbook/programming/_projects/pdf-something/backend/highlighting.cpp",
   "file": "/Users/macbook/programming/_projects/pdf-something/backend/highlighting.cpp"
 },
 {
   "directory": "/Users/macbook/programming/_projects/pdf-something/backend",
-  "command": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++    -I/Users/macbook/programming/_projects/pdf-something/backend/../dependencies -I/Users/macbook/programming/_projects/pdf-something/backend  -O3 -DNDEBUG   -std=c++17 -O2 -o CMakeFiles/libbackend.dir/pdf_document.cpp.o -c /Users/macbook/programming/_projects/pdf-something/backend/pdf_document.cpp",
+  "command": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++    -I/Users/macbook/programming/_projects/pdf-something/backend/../dependencies -I/Users/macbook/programming/_projects/pdf-something/backend  -O3 -DNDEBUG   -std=c++17 -Ofast -o CMakeFiles/libbackend.dir/pdf_document.cpp.o -c /Users/macbook/programming/_projects/pdf-something/backend/pdf_document.cpp",
   "file": "/Users/macbook/programming/_projects/pdf-something/backend/pdf_document.cpp"
 },
 {
   "directory": "/Users/macbook/programming/_projects/pdf-something/backend",
-  "command": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++    -I/Users/macbook/programming/_projects/pdf-something/backend/../dependencies -I/Users/macbook/programming/_projects/pdf-something/backend  -O3 -DNDEBUG   -std=c++17 -O2 -o CMakeFiles/libbackend.dir/pdf_page.cpp.o -c /Users/macbook/programming/_projects/pdf-something/backend/pdf_page.cpp",
+  "command": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++    -I/Users/macbook/programming/_projects/pdf-something/backend/../dependencies -I/Users/macbook/programming/_projects/pdf-something/backend  -O3 -DNDEBUG   -std=c++17 -Ofast -o CMakeFiles/libbackend.dir/pdf_page.cpp.o -c /Users/macbook/programming/_projects/pdf-something/backend/pdf_page.cpp",
   "file": "/Users/macbook/programming/_projects/pdf-something/backend/pdf_page.cpp"
 },
 {
   "directory": "/Users/macbook/programming/_projects/pdf-something/backend",
-  "command": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++    -I/Users/macbook/programming/_projects/pdf-something/backend/../dependencies -I/Users/macbook/programming/_projects/pdf-something/backend  -O3 -DNDEBUG   -std=c++17 -O2 -o CMakeFiles/libbackend.dir/timer.cpp.o -c /Users/macbook/programming/_projects/pdf-something/backend/timer.cpp",
+  "command": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++    -I/Users/macbook/programming/_projects/pdf-something/backend/../dependencies -I/Users/macbook/programming/_projects/pdf-something/backend  -O3 -DNDEBUG   -std=c++17 -Ofast -o CMakeFiles/libbackend.dir/timer.cpp.o -c /Users/macbook/programming/_projects/pdf-something/backend/timer.cpp",
   "file": "/Users/macbook/programming/_projects/pdf-something/backend/timer.cpp"
 },
 {
   "directory": "/Users/macbook/programming/_projects/pdf-something/backend",
-  "command": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++    -I/Users/macbook/programming/_projects/pdf-something/backend/../dependencies -I/Users/macbook/programming/_projects/pdf-something/backend  -O3 -DNDEBUG   -std=c++17 -O2 -o CMakeFiles/libbackend.dir/uuid.cpp.o -c /Users/macbook/programming/_projects/pdf-something/backend/uuid.cpp",
+  "command": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++    -I/Users/macbook/programming/_projects/pdf-something/backend/../dependencies -I/Users/macbook/programming/_projects/pdf-something/backend  -O3 -DNDEBUG   -std=c++17 -Ofast -o CMakeFiles/libbackend.dir/uuid.cpp.o -c /Users/macbook/programming/_projects/pdf-something/backend/uuid.cpp",
   "file": "/Users/macbook/programming/_projects/pdf-something/backend/uuid.cpp"
 },
 {
   "directory": "/Users/macbook/programming/_projects/pdf-something/backend",
-  "command": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++    -I/Users/macbook/programming/_projects/pdf-something/backend/../dependencies -I/Users/macbook/programming/_projects/pdf-something/backend  -O3 -DNDEBUG   -std=c++17 -O2 -o CMakeFiles/libbackend.dir/window.cpp.o -c /Users/macbook/programming/_projects/pdf-something/backend/window.cpp",
+  "command": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++    -I/Users/macbook/programming/_projects/pdf-something/backend/../dependencies -I/Users/macbook/programming/_projects/pdf-something/backend  -O3 -DNDEBUG   -std=c++17 -Ofast -o CMakeFiles/libbackend.dir/window.cpp.o -c /Users/macbook/programming/_projects/pdf-something/backend/window.cpp",
   "file": "/Users/macbook/programming/_projects/pdf-something/backend/window.cpp"
 },
 {
   "directory": "/Users/macbook/programming/_projects/pdf-something/backend",
-  "command": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++    -I/Users/macbook/programming/_projects/pdf-something/backend/../dependencies -I/Users/macbook/programming/_projects/pdf-something/backend  -O3 -DNDEBUG   -std=c++17 -O2 -o CMakeFiles/libbackend.dir/window_split_screen.cpp.o -c /Users/macbook/programming/_projects/pdf-something/backend/window_split_screen.cpp",
+  "command": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++    -I/Users/macbook/programming/_projects/pdf-something/backend/../dependencies -I/Users/macbook/programming/_projects/pdf-something/backend  -O3 -DNDEBUG   -std=c++17 -Ofast -o CMakeFiles/libbackend.dir/window_split_screen.cpp.o -c /Users/macbook/programming/_projects/pdf-something/backend/window_split_screen.cpp",
   "file": "/Users/macbook/programming/_projects/pdf-something/backend/window_split_screen.cpp"
 },
 {
   "directory": "/Users/macbook/programming/_projects/pdf-something/backend",
-  "command": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++    -I/Users/macbook/programming/_projects/pdf-something/backend/../dependencies -I/Users/macbook/programming/_projects/pdf-something/backend  -O3 -DNDEBUG   -std=c++17 -O2 -o CMakeFiles/libbackend.dir/windows_configuration.cpp.o -c /Users/macbook/programming/_projects/pdf-something/backend/windows_configuration.cpp",
+  "command": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++    -I/Users/macbook/programming/_projects/pdf-something/backend/../dependencies -I/Users/macbook/programming/_projects/pdf-something/backend  -O3 -DNDEBUG   -std=c++17 -Ofast -o CMakeFiles/libbackend.dir/windows_configuration.cpp.o -c /Users/macbook/programming/_projects/pdf-something/backend/windows_configuration.cpp",
   "file": "/Users/macbook/programming/_projects/pdf-something/backend/windows_configuration.cpp"
 },
 {
   "directory": "/Users/macbook/programming/_projects/pdf-something/backend",
-  "command": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++    -I/Users/macbook/programming/_projects/pdf-something/backend/../dependencies -I/Users/macbook/programming/_projects/pdf-something/backend  -O3 -DNDEBUG   -std=c++17 -O2 -o CMakeFiles/libbackend.dir/database/database.cpp.o -c /Users/macbook/programming/_projects/pdf-something/backend/database/database.cpp",
+  "command": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++    -I/Users/macbook/programming/_projects/pdf-something/backend/../dependencies -I/Users/macbook/programming/_projects/pdf-something/backend  -O3 -DNDEBUG   -std=c++17 -Ofast -o CMakeFiles/libbackend.dir/database/database.cpp.o -c /Users/macbook/programming/_projects/pdf-something/backend/database/database.cpp",
   "file": "/Users/macbook/programming/_projects/pdf-something/backend/database/database.cpp"
 },
 {
   "directory": "/Users/macbook/programming/_projects/pdf-something/backend",
-  "command": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++    -I/Users/macbook/programming/_projects/pdf-something/backend/../dependencies -I/Users/macbook/programming/_projects/pdf-something/backend  -O3 -DNDEBUG   -std=c++17 -O2 -o CMakeFiles/libbackend.dir/database/mediator.cpp.o -c /Users/macbook/programming/_projects/pdf-something/backend/database/mediator.cpp",
+  "command": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++    -I/Users/macbook/programming/_projects/pdf-something/backend/../dependencies -I/Users/macbook/programming/_projects/pdf-something/backend  -O3 -DNDEBUG   -std=c++17 -Ofast -o CMakeFiles/libbackend.dir/database/mediator.cpp.o -c /Users/macbook/programming/_projects/pdf-something/backend/database/mediator.cpp",
   "file": "/Users/macbook/programming/_projects/pdf-something/backend/database/mediator.cpp"
 },
 {
   "directory": "/Users/macbook/programming/_projects/pdf-something/backend",
-  "command": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++    -I/Users/macbook/programming/_projects/pdf-something/backend/../dependencies -I/Users/macbook/programming/_projects/pdf-something/backend  -O3 -DNDEBUG   -std=c++17 -O2 -o CMakeFiles/libbackend.dir/database/resources_manager.cpp.o -c /Users/macbook/programming/_projects/pdf-something/backend/database/resources_manager.cpp",
+  "command": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++    -I/Users/macbook/programming/_projects/pdf-something/backend/../dependencies -I/Users/macbook/programming/_projects/pdf-something/backend  -O3 -DNDEBUG   -std=c++17 -Ofast -o CMakeFiles/libbackend.dir/database/resources_manager.cpp.o -c /Users/macbook/programming/_projects/pdf-something/backend/database/resources_manager.cpp",
   "file": "/Users/macbook/programming/_projects/pdf-something/backend/database/resources_manager.cpp"
 },
 {
   "directory": "/Users/macbook/programming/_projects/pdf-something/frontends/canonical",
-  "command": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++    -I/Users/macbook/programming/_projects/pdf-something/frontends/canonical/../../dependencies -I/Users/macbook/programming/_projects/pdf-something/backend  -O3 -DNDEBUG   -std=c++17 -O2 -o CMakeFiles/canonical-frontend.dir/main.cpp.o -c /Users/macbook/programming/_projects/pdf-something/frontends/canonical/main.cpp",
+  "command": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++    -I/Users/macbook/programming/_projects/pdf-something/frontends/canonical/../../dependencies -I/Users/macbook/programming/_projects/pdf-something/backend  -O3 -DNDEBUG   -std=c++17 -Ofast -o CMakeFiles/canonical-frontend.dir/main.cpp.o -c /Users/macbook/programming/_projects/pdf-something/frontends/canonical/main.cpp",
   "file": "/Users/macbook/programming/_projects/pdf-something/frontends/canonical/main.cpp"
 },
 {
   "directory": "/Users/macbook/programming/_projects/pdf-something/frontends/canonical",
-  "command": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++    -I/Users/macbook/programming/_projects/pdf-something/frontends/canonical/../../dependencies -I/Users/macbook/programming/_projects/pdf-something/backend  -O3 -DNDEBUG   -std=c++17 -O2 -o CMakeFiles/canonical-frontend.dir/backend_implementations/canonical_window_layout.cpp.o -c /Users/macbook/programming/_projects/pdf-something/frontends/canonical/backend_implementations/canonical_window_layout.cpp",
+  "command": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++    -I/Users/macbook/programming/_projects/pdf-something/frontends/canonical/../../dependencies -I/Users/macbook/programming/_projects/pdf-something/backend  -O3 -DNDEBUG   -std=c++17 -Ofast -o CMakeFiles/canonical-frontend.dir/backend_implementations/canonical_window_layout.cpp.o -c /Users/macbook/programming/_projects/pdf-something/frontends/canonical/backend_implementations/canonical_window_layout.cpp",
   "file": "/Users/macbook/programming/_projects/pdf-something/frontends/canonical/backend_implementations/canonical_window_layout.cpp"
 },
 {
   "directory": "/Users/macbook/programming/_projects/pdf-something/frontends/canonical",
-  "command": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++    -I/Users/macbook/programming/_projects/pdf-something/frontends/canonical/../../dependencies -I/Users/macbook/programming/_projects/pdf-something/backend  -O3 -DNDEBUG   -std=c++17 -O2 -o CMakeFiles/canonical-frontend.dir/backend_implementations/io/canonical_file.cpp.o -c /Users/macbook/programming/_projects/pdf-something/frontends/canonical/backend_implementations/io/canonical_file.cpp",
+  "command": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++    -I/Users/macbook/programming/_projects/pdf-something/frontends/canonical/../../dependencies -I/Users/macbook/programming/_projects/pdf-something/backend  -O3 -DNDEBUG   -std=c++17 -Ofast -o CMakeFiles/canonical-frontend.dir/backend_implementations/io/canonical_file.cpp.o -c /Users/macbook/programming/_projects/pdf-something/frontends/canonical/backend_implementations/io/canonical_file.cpp",
   "file": "/Users/macbook/programming/_projects/pdf-something/frontends/canonical/backend_implementations/io/canonical_file.cpp"
 }
 ]

@@ -31,6 +31,7 @@ void Pdf_document::load_all_pages(json const & j)
     for(auto && j_page : j["pages"]) {
         Uuid page_uuid(j_page["uuid"].get<std::string>());
         Pdf_page * page = Mediator::pdf_page_for_uuid(page_uuid);
+        page->compute_size();
         page->in_document = this;
         page->index_in_pdf = j_page["index_in_pdf"];
         this->pages.insert(std::make_pair(page_uuid, page));
@@ -197,7 +198,7 @@ bool Pdf_document::is_valid() const
         Uuid & uuid = const_cast<Uuid &>(e.first);
         uuid0.insert(uuid);
         if(!Mediator::pdf_page_is_loaded(uuid)) {
-            std::cerr << "error: pdf_page is not loaded, uuid = " << uuid << "\n";
+            std::cerr << "error: (pages), pdf_page is not loaded, uuid = " << uuid << "\n";
             is_valid = false;
         }
     }
@@ -205,7 +206,7 @@ bool Pdf_document::is_valid() const
         Uuid & uuid = const_cast<Uuid &>(e.first);
         uuid1.insert(uuid);
         if(!Mediator::pdf_page_is_loaded(uuid)) {
-            std::cerr << "error: pdf_page is not loaded, uuid = " << uuid << "\n";
+            std::cerr << "error: (numbering.left), pdf_page is not loaded, uuid = " << uuid << "\n";
             is_valid = false;
         }
     }

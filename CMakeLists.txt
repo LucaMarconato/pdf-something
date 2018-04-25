@@ -3,7 +3,7 @@
 cmake_minimum_required (VERSION 2.6)
 project (pdf-something)
 # add_definitions("-std=c++17 -Wall -g -O0")
-add_definitions("-std=c++17 -O2")
+add_definitions("-std=c++17 -Ofast")
 
 # Version Number
 
