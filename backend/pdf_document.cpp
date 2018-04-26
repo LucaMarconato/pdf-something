@@ -10,29 +10,41 @@
 #include "database/resources_manager.hpp"
 #include "database/mediator.hpp"
 #include "timer.hpp"
+#include "constants.hpp"
 
 Pdf_document::Pdf_document(json const & j)
 {
-    // std::cout << "j[\"format\"] = " << j["format"] << "\n";
     this->uuid = Uuid(j["uuid"].get<std::string>());
     this->in_program_directory = j["in_program_directory"].get<std::string>();
     this->name = j["name"].get<std::string>();
     this->latest_opening = Datetime(j["latest_opening"].get<std::string>());
+    this->index = j["current_index"].get<unsigned int>();
+    auto & j_grid_layout = j["grid_layout"];
+    unsigned int number_of_rows = j_grid_layout["rows"].get<unsigned int>();
+    unsigned int number_of_columns = j_grid_layout["columns"].get<unsigned int>();
+    Grid_layout grid_layout(number_of_rows, number_of_columns);
+    this->grid_layout = grid_layout;    
 }
 
 void Pdf_document::load_all_pages(json const & j)
 {    
     if(this->pages.size() > 0 || this->numbering.size() > 0) {
-        std::cerr << "this->pages.size() = " << this->pages.size() << ", this->numbering.size() = " << this->numbering.size() << "\n";
-        return;
+        std::cerr << "the document has already been loaded, this->pages.size() = " << this->pages.size() << ", this->numbering.size() = " << this->numbering.size() << "\n";
+        MY_ASSERT(false);
+        exit(1);
     }
-    //--------allocating the pages and the highlighting components, putting them into the pages--------
-    // std::cerr << "started loading the pages\n";
+    // --------allocating the pages and the highlighting components, putting them into the pages--------
     for(auto && j_page : j["pages"]) {
         Uuid page_uuid(j_page["uuid"].get<std::string>());
         Pdf_page * page = Mediator::pdf_page_for_uuid(page_uuid);
         page->compute_size();
         page->in_document = this;
+        /*
+          This is the real index of the page in the .pdf file.
+          The page ordering shown to the user does not depend on this but on Page::index.
+          Page::index_in_pdf is used for rendering the Page.
+          Using two indexes we can swap two pages with virtually no cost.
+        */
         page->index_in_pdf = j_page["index_in_pdf"];
         this->pages.insert(std::make_pair(page_uuid, page));
 
@@ -50,20 +62,19 @@ void Pdf_document::load_all_pages(json const & j)
         page->x1_crop = j_crop["x1"].get<double>(); 
         page->y1_crop = j_crop["y1"].get<double>();
     }
-    // std::cerr << "finished loading the pages\n";
-    //--------giving pages the correct number--------
+
+    // --------giving pages the correct number--------
     /*
-      Here I am building a linked list. There are more efficient ways but this is probably the easiesy to type.
-      I build also another linked list to check that the .json file was correct.
-      In the .json file for each page there are three pieces of information: its uuid, the uuid of the previous page and the uuid of the next pages.
-      The pages can be listed in a generic order (because pages can be moved), this is the reason I find useful to use an std::map
+      Here I am building a linked list. There are more efficient ways but this is probably the easiest to type.
+      I build also another linked list to check that the .json file has not corrupted information about the page ordering.
+      In the .json file for each page there are three pieces of information: its uuid, the uuid of the previous page and the uuid of the next pagen.
+      The pages can be listed in a generic order (because pages can be moved), this is the reason I find useful to use an std::map as an intermediate step for building the linked list
     */
     std::map<Uuid,Uuid> map_linked_list_forward;
     std::map<Uuid,Uuid> map_linked_list_backward;
     Uuid first;
     Uuid last;
     for(auto && j_page_ordering : j["pages_ordering"]) {
-        // std::cerr << j["page_ordering"] << "\n";
         Uuid page_uuid(j_page_ordering["uuid"].get<std::string>());
         auto & j_ordering = j_page_ordering["ordering"];
         std::string prev = j_ordering["prev"].get<std::string>();
@@ -83,16 +94,16 @@ void Pdf_document::load_all_pages(json const & j)
     }
     if(map_linked_list_forward.size() != map_linked_list_backward.size()) {
         std::cerr << "error: map_linked_list_forward.size() = " << map_linked_list_forward.size() << ", map_linked_list_backward.size() = " << map_linked_list_backward.size() << "\n";
-        exit(1);
+        MY_ASSERT(false); exit(1);
     }
 
-    //integrity check 
+    // integrity check 
     if(!first.is_valid() || !last.is_valid()) {
         std::cerr << "error: unable to create the linked list for the page ordering\n";
-        exit(1);
+        MY_ASSERT(false); exit(1);
     }
 
-    //build the linked lists
+    // builds the linked lists using the maps
     std::list<Uuid> linked_list_forward;    
     std::list<Uuid> linked_list_backward;
 
@@ -110,14 +121,14 @@ void Pdf_document::load_all_pages(json const & j)
             i++;
             if(i > max_iterations) {
                 std::cerr << "error: max_iterations = " << max_iterations << ", i = " << i << "\n";
-                exit(1);
+                MY_ASSERT(false); exit(1);
             }
             if(*current == end) {
                 break;
             }
             if(map_linked_list.find(*current) == map_linked_list.end()) {
                 std::cerr << "error: *current = " << *current << " not found in map\n";
-                exit(1);
+                MY_ASSERT(false); exit(1);
             }
             current = &(map_linked_list[*current]);
         }
@@ -127,16 +138,16 @@ void Pdf_document::load_all_pages(json const & j)
     build_linked_list_from_map(map_linked_list_backward, linked_list_backward, last, first);
     linked_list_backward.reverse();
 
-    //set the page ordering
+    // sets the page ordering
     auto it = linked_list_forward.begin();
     auto jt = linked_list_backward.begin();
     unsigned int i = 0;
     while(it != linked_list_forward.end() && it != linked_list_backward.end()) {
         Uuid & uuid = *it;
-        //integrity check
+        // integrity check
         if(uuid != *jt) {
             std::cerr << "error: *it = " << *it << ", *jt = " << *jt << "\n";
-            exit(1);
+            MY_ASSERT(false); exit(1);
         }
         this->numbering.insert( boost::bimap<Uuid, int>::value_type(uuid,i) );
         this->pages[uuid]->index = i;
@@ -145,18 +156,16 @@ void Pdf_document::load_all_pages(json const & j)
         i++;
     }
     
-    //--------loading the highlightings--------
+    // --------loading the highlightings--------
     for(auto && j_highlighting : j["highlightings"]) {
         Uuid highlighting_uuid(j_highlighting["uuid"].get<std::string>());
         Highlighting * highlighting = Mediator::highlighting_for_uuid(highlighting_uuid);
-        highlighting->in_document = this;
-        
+        highlighting->in_document = this;        
         highlighting->color = Color::from_string(j_highlighting["color"].get<std::string>());
         highlighting->text = j_highlighting["text"].get<std::string>();
     }
     
-    //--------loading the highlighting components--------
-    // std::cerr << "started loading the highlighting components\n";
+    // --------loading the highlighting components--------
     for(auto && j_highlighting_component : j["highlighting_components"]) {
         Uuid highlighting_component_uuid(j_highlighting_component["uuid"].get<std::string>());
         Uuid parent_highlighting_uuid(j_highlighting_component["parent_highlighting"].get<std::string>());
@@ -173,25 +182,26 @@ void Pdf_document::load_all_pages(json const & j)
         highlighting_component->y0 = y0;
         highlighting_component->y1 = y1;
     }
-    // std::cerr << "finished loading the highlighting components\n";
+    if(!this->is_valid()) {
+        std::cerr << "error: failed to load all pages\n";
+        exit(1);
+    }
+}
+
+std::string Pdf_document::serialize_to_json()
+{
+    std::cerr << "error: not yet implemented\n";
+    MY_ASSERT(false); exit(1);
 }
 
 bool Pdf_document::is_valid() const
 {
     bool is_valid = true;
     is_valid = is_valid && this->Document::is_valid();
+    is_valid = is_valid && this->pages.size() == this->numbering.size();
+    is_valid = is_valid && VALID_PAGE_INDEX(this->pages.size()-1);
 
-    if(this->pages.size() != this->numbering.size()) {
-        is_valid = false;
-        std::cerr << "error: this->pages.size() = " << this->pages.size() << ", this->numbering.size() = " << this->numbering.size() << "\n";
-        exit(1);
-    }
-    
-    if(this->pages.size() == 0) {
-        is_valid = false;
-        std::cerr << "error: this->pages.size() = " << this->pages.size() << "\n";
-    }
-    
+    // checks that this->pages and this->numbering are using the same set of uuids
     std::set<Uuid> uuid0;
     std::set<Uuid> uuid1;
     for(auto && e : this->pages) {
@@ -220,11 +230,12 @@ bool Pdf_document::is_valid() const
         for(auto && e : uuid1) {
             std::cout << "e = " << e << "\n";
         }
-        exit(1);
+        MY_ASSERT(false); exit(1);
     }
 
     if(!is_valid) {
         std::cerr << "error: Pdf_document, is_valid = " << is_valid << "\n";
+        MY_ASSERT(false); exit(1);
     }
     
     return is_valid;
@@ -242,7 +253,7 @@ void Pdf_document::print(std::ostream &stream) const
         for(auto && page : this->pages) {
             stream << "-page:<BR>";
             stream << "<blockquote>";
-            stream << *(page.second) << "<BR>";
+            stream << *(page.second);
             stream << "</blockquote>";
         }
     } else {
@@ -255,9 +266,4 @@ std::ostream & operator<<(std::ostream & stream, const Pdf_document & obj)
 {
     obj.print(stream);
     return stream;
-}
-
-Pdf_document::~Pdf_document()
-{
-    
 }

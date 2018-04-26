@@ -13,7 +13,7 @@ void Windows_configuration::parse(char * file_content)
 {
     if(Windows_configuration::already_initialized) {
         std::cerr << "error: Windows_configuration already initalized\n";
-        exit(1);
+        MY_ASSERT(false); exit(1);
     }
     Windows_configuration::already_initialized = true;
     auto j = json::parse(file_content);
@@ -44,7 +44,7 @@ void Windows_configuration::parse(char * file_content)
 
         if(split_screen_number_of_rows * split_screen_number_of_columns != j_window_split_screen_elements.size()) {
             std::cerr << "error: split_screen_number_of_rows = " << split_screen_number_of_rows << ", split_screen_number_of_columns = " << split_screen_number_of_columns << "\n";
-            exit(1);
+            MY_ASSERT(false); exit(1);
         }
         
         Window_split_screen window_split_screen;
@@ -53,13 +53,8 @@ void Windows_configuration::parse(char * file_content)
         unsigned int i = 0;
         for(auto && j_window_split_screen_element : j_window_split_screen_elements) {
             Uuid document_uuid(j_window_split_screen_element["document"].get<std::string>());
-            unsigned int current_index = j_window_split_screen_element["current_index"].get<unsigned int>();
             Document * document = Mediator::document_for_uuid(document_uuid);
-            auto & j_grid_layout = j_window_split_screen_element["grid_layout"];
-            unsigned int grid_layout_number_of_rows = j_grid_layout["rows"].get<unsigned int>();
-            unsigned int grid_layout_number_of_columns = j_grid_layout["columns"].get<unsigned int>();;
-            Grid_layout grid_layout(grid_layout_number_of_rows, grid_layout_number_of_columns);
-            Window_split_screen_element window_split_screen_element(document,current_index,grid_layout);
+            Window_split_screen_element window_split_screen_element(document);
             window_split_screen.set_split_screen_element(window_split_screen_element,i,j);
             j++;
             if(j == split_screen_number_of_columns) {
@@ -80,7 +75,7 @@ bool Windows_configuration::is_valid()
 
     if(!is_valid) {
         std::cerr << "error: Windows_configuration, is_valid = " << is_valid << "\n";
-        exit(1);
+        MY_ASSERT(false); exit(1);
     }
     return is_valid;
 }

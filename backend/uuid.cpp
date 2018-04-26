@@ -6,6 +6,8 @@
 #include <boost/uuid/uuid_generators.hpp> //generate uuid
 #include <boost/uuid/uuid_io.hpp> //streaming for uuids
 
+#include "constants.hpp"
+
 Uuid::Uuid() {}
 
 Uuid::Uuid(boost::uuids::uuid boost_uuid)
@@ -24,7 +26,7 @@ bool Uuid::is_valid() const
 {
     if(this->empty_uuid) {
         std::cerr << "error: this->empty_uuid = " << this->empty_uuid << "\n";
-        exit(1);
+        MY_ASSERT(false); exit(1);
     }
     return !this->empty_uuid;
 }
@@ -63,6 +65,10 @@ bool operator<(Uuid const & lhs, Uuid const & rhs)
 
 std::ostream & operator<<(std::ostream & stream, const Uuid & obj)
 {
-    stream << obj.to_string();
+    if(!obj.empty_uuid) {
+        stream << obj.to_string();
+    } else {        
+        stream << "[uninitialized uuid]";
+    }
     return stream;
 }

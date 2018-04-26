@@ -69,7 +69,7 @@ std::ostream & operator<<(std::ostream & stream, const Color & obj)
     if(obj.is_valid()) {
         stream << "obj.r = " << obj.r << ", obj.g = " << obj.g << ", obj.b = " << obj.b << ", obj.a = " << obj.a << "\n";;
     } else {
-        stream << "<uninitalized color>";
+        stream << "[uninitalized color]";
     }    
     return stream;
 }

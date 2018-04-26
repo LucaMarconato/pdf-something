@@ -17,19 +17,9 @@
                 [
                     {
                         "document": "f9f2c8ce-1f40-4578-a193-2c9a57e8f0c6",
-                        "current_index": 41,
-                        "grid_layout": {
-                            "rows": 2,
-                            "columns": 4
-                        }
                     },
                     {
                         "document": "f9f2c8ce-1f40-4578-a193-2c9a57e8f0c6",
-                        "current_index": 1,
-                        "grid_layout": {
-                            "rows": 2,
-                            "columns": 4
-                        }
                     }
                 ]
             }
@@ -50,19 +40,9 @@
                 [
                     {
                         "document": "f9f2c8ce-1f40-4578-a193-2c9a57e8f0c6",
-                        "current_index": 1,
-                        "grid_layout": {
-                            "rows": 3,
-                            "columns": 3
-                        }
                     },
                     {
                         "document": "f9f2c8ce-1f40-4578-a193-2c9a57e8f0c6",
-                        "current_index": 2,
-                        "grid_layout": {
-                            "rows": 2,
-                            "columns": 2
-                        }
                     }
                 ]
             }
@@ -83,19 +63,9 @@
                 [
                     {
                         "document": "f9f2c8ce-1f40-4578-a193-2c9a57e8f0c6",
-                        "current_index": 1,
-                        "grid_layout": {
-                            "rows": 3,
-                            "columns": 3
-                        }
                     },
                     {
                         "document": "f9f2c8ce-1f40-4578-a193-2c9a57e8f0c6",
-                        "current_index": 2,
-                        "grid_layout": {
-                            "rows": 2,
-                            "columns": 2
-                        }
                     }
                 ]
             }

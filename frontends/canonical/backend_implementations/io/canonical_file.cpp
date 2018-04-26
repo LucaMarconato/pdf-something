@@ -5,6 +5,8 @@
 #include <string>
 #include <fstream>
 
+#include "constants.hpp"
+
 std::map <Uuid, std::fstream*> fstreams;
 
 File::File()
@@ -37,7 +39,7 @@ bool File::open(std::string path, Opening_mode opening_mode)
     default:
         std::cerr << "error: opening_mode = " << this->opening_mode << "\n";
         delete file;
-        exit(1);
+        MY_ASSERT(false); exit(1);
     }
     if(!file->is_open()) {
         std::cerr << "error: cannot open file, path = " << path << ", opening_mode = " << this->opening_mode << "\n";
@@ -65,7 +67,7 @@ void File::close()
     auto e = ::fstreams.find(this->uuid_of_frontend_resource);
     if(e == ::fstreams.end()) {
         std::cerr << "error: cannot find frontend resource, this->uuid_of_frontend_resource = " << this->uuid_of_frontend_resource << "\n";
-        exit(1);
+        MY_ASSERT(false); exit(1);
     }
     delete ::fstreams[this->uuid_of_frontend_resource];
     ::fstreams.erase(this->uuid_of_frontend_resource);
@@ -94,12 +96,12 @@ void File::read_all_content(bool append_null, char ** buffer)
 {
     if(this->opening_mode != File::READ_BINARY) {
         std::cerr << "error: this->opening_mode = " << this->opening_mode << "\n";
-        exit(1);
+        MY_ASSERT(false); exit(1);
     }
     std::fstream * file = ::fstreams[this->uuid_of_frontend_resource];
     if(*buffer != nullptr) {
         std::cerr << "error: *buffer != nullptr\n";
-        exit(1);
+        MY_ASSERT(false); exit(1);
     }
     unsigned long long file_size = this->size();
     *buffer = new char [file_size + (append_null ? 1 : 0)];
@@ -114,7 +116,7 @@ void File::write(char * to_write, int bytes)
 {
     if(this->opening_mode != File::WRITE_BINARY && this->opening_mode != File::APPEND_BINARY) {
         std::cerr << "error: this->opening_mode = " << this->opening_mode << "\n";
-        exit(1);
+        MY_ASSERT(false); exit(1);
     }    
     std::fstream * file = ::fstreams[this->uuid_of_frontend_resource];
     file->write(to_write, bytes);
@@ -124,7 +126,7 @@ void File::write(std::string to_write)
 {
     if(this->opening_mode != File::WRITE_BINARY && this->opening_mode != File::APPEND_BINARY) {
         std::cerr << "error: this->opening_mode = " << this->opening_mode << "\n";
-        exit(1);
+        MY_ASSERT(false); exit(1);
     }        
     this->write(const_cast<char *>(to_write.c_str()), to_write.length()+1);
 }

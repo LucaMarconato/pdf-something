@@ -11,8 +11,17 @@ class Mediator: Database, Resources_manager {
 public:
     Mediator() = delete;
     /*
+
+    */
+
+    /*
       These methods check if the resource associated to the uuid is already in memory.
       If it is, they return it, if not, they load it in memory from the Database and then they return it.
+
+      A brief comment on the document_for_uuid methods.
+      This function implements the factory pattern: depending of the information in the database associated with the uuid, a different subclass of Document will be allocated (for instance a Pdf_document).
+      The polymorphism is exploited by calling virtual functions on the Document * object which is returned, the correct virtual implementation will be called since the object internally knows which subclass it is.
+      Note that returning a Document instead of a Document * will cause slicing (loss of information)
     */
     static Document * document_for_uuid(Uuid const & uuid);
     static Pdf_page * pdf_page_for_uuid(Uuid const & uuid);

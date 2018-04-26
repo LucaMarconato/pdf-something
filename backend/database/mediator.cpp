@@ -1,10 +1,14 @@
 #include "mediator.hpp"
 
+#include <iostream>
+
+#include <nlohmann/json.hpp>
+using json = nlohmann::json;
+
 #include "../io/file.hpp"
 #include "../windows_configuration.hpp"
 #include "../timer.hpp"
-
-#include <iostream>
+#include "../pdf_document.hpp"
 
 Uuid Mediator::get_latest_opened_pdf()
 {
@@ -19,8 +23,17 @@ Document * Mediator::document_for_uuid(Uuid const & uuid)
     auto e = loaded.find(uuid);
     if(e == loaded.end()) {
         char * buffer = Database::read_document(uuid);
-        Document * document = Document::parse(buffer);
+        auto j = json::parse(buffer);
         delete [] buffer;
+        
+        Document * document = nullptr;        
+        if(j["format"] == "pdf") {        
+            document = new Pdf_document(j);
+            document->load_all_pages(j);
+        } else {
+            std::cout << "\"" << j["format"] << "\" format is not supported\n";
+        }        
+        
         loaded[uuid] = document;
         return document;
     } else {

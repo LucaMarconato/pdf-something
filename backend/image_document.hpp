@@ -6,8 +6,10 @@
 */
 
 #include <iostream>
+#include <string>
 
 #include "document.hpp"
+#include "constants.hpp"
 
 class Image_document : public Document {
     public:
@@ -15,14 +17,19 @@ class Image_document : public Document {
 };
 
 class Png_document : public Image_document {
-public:
+public:    
+    std::string serialize_to_json() {
+        std::cerr << "error: not yet implemented\n";
+        MY_ASSERT(false); exit(1);
+    }
+    
     bool is_valid() const {
         return false;
     }
     void print(std::ostream &stream) const
     {
         stream << "this class is only sketched\n";
-        // exit(1);
+        // MY_ASSERT(false); exit(1);
     }
 };
 

@@ -4,6 +4,8 @@
 #include <iomanip> //for put_time()
 #include <iostream>
 
+#include "constants.hpp"
+
 Datetime::Datetime() {}
 
 Datetime::Datetime(std::string datetime)
@@ -33,7 +35,7 @@ bool Datetime::is_valid() const
 
     if(!is_valid) {
         std::cerr << "error: is_valid = -1\n";
-        exit(1);
+        MY_ASSERT(false); exit(1);
     }
     return is_valid;
 }
@@ -48,7 +50,7 @@ std::string Datetime::to_string() const
 std::ostream & operator<<(std::ostream & stream, const Datetime & obj)
 {
     if(!obj.is_valid()) {
-        stream << "<uninitalized datetime>";
+        stream << "[uninitalized datetime]";
     } else {
         stream << obj.to_string();
     }

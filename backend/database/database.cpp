@@ -13,7 +13,7 @@ char * Database::read_document(Uuid const & uuid)
     file.open(file_path, File::READ_BINARY);
     if(!file.is_open) {
         std::cerr << "error: unable to locate the document uuid = " << uuid << "\n";
-        exit(1);
+        MY_ASSERT(false); exit(1);
     } else {
         char * buffer = nullptr;
         file.read_all_content(true, &buffer);
@@ -30,7 +30,7 @@ char * Database::read_latest_windows_configuration()
     file.open(file_path, File::READ_BINARY);
     if(!file.is_open) {
         std::cerr << "error: unable to locate the latest windows configuration file\n";
-        exit(1);
+        MY_ASSERT(false); exit(1);
     } else {
         char * buffer = nullptr;
         file.read_all_content(true, &buffer);

@@ -1,6 +1,7 @@
 {
     "files.associations": {
-        "list": "cpp"
+        "list": "cpp",
+        "chrono": "cpp"
     },
     "editor.wordWrap": "on",
     "workbench.editor.showTabs": false,

@@ -26,8 +26,7 @@ protected:
     static char * read_document(Uuid const & uuid);
     /*
       Again, this is stored in a .json file.
-      The .json file is always very small but we would need to update it everytime the user change pages, changes document, ...
-      So we need to drop .json even here.
+      This .json file is always very small and we need to update ity far less frequently than .json files describing documents, so we may decide to keep this format.
 
       Important:
       -the caller function is responsible to delete the returned memory

@@ -24,6 +24,10 @@ protected:
       See also: https://github.com/LucaMarconato/pdf-something/issues/7
     */
     static std::unordered_map<Uuid, Document *> loaded_documents;
+    /*
+      Note the we should have a polymorphic class, say Page, instead of Pdf_page, like we do for Document instead of Pdf_document.
+      We shall modify this in the future, but not now, since for the moment we are mainly focusing on .pdf files
+    */
     static std::unordered_map<Uuid, Pdf_page *> loaded_pdf_pages;
     static std::unordered_map<Uuid, Highlighting *> loaded_highlightings;
     static std::unordered_map<Uuid, Highlighting_component *> loaded_highlighting_components;

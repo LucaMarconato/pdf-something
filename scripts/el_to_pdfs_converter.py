@@ -39,7 +39,7 @@ class Page:
 		self.highlighting_components = set()
 
 class Document:
-	def __init__(self, uuid, name, page_count, latest_opening):
+	def __init__(self, uuid, name, page_count, latest_opening, current_page, rows, columns):
 		self.uuid = uuid
 		self.name = name
 		self.pages = [Page(i) for i in range(page_count)]
@@ -48,6 +48,9 @@ class Document:
 		dt = datetime.datetime.utcfromtimestamp(latest_opening) + delta
 		self.latest_opening = dt.strftime('%Y-%m-%d %H:%M:%S')
 		self.highlightings = dict()
+		self.current_page = current_page
+		self.rows = rows
+		self.columns = columns
 	
 	def add_highlighting_component(self,t,at_page):
 		highlighting_uuid = t[0].lower()
@@ -103,6 +106,11 @@ def convert_document(document):
 	s += f'"name":{json.dumps(document.name)},\n'
 	s += f'"in_program_directory":"/",\n'
 	s += f'"latest_opening":"{document.latest_opening}",\n'
+	s += f'"current_index":{document.current_page},\n'
+	s += '"grid_layout"\n:{\n'
+	s += f'"rows":{document.rows},\n'
+	s += f'"columns":{document.columns}\n'
+	s += '},\n'
 	s += '"pages":\n[\n'
 	i = 0
 	for page in document.pages:
@@ -233,8 +241,11 @@ def parse_document(t):
 	document_uuid = t[12].lower()
 	document_latest_opening = t[8]
 	document_name = t[11]
-	print(f'document_id = {document_id}, document_uuid = {document_uuid}, document_name = {document_name}')
-	page_count = page_count_for_document_id(document_id)	
+	current_page = t[5]
+	rows = t[6]
+	columns = t[4]
+	print(f'document_id = {document_id}, document_uuid = {document_uuid}, document_name = {document_name}, rows = {rows}, columns = {columns}, current_page = {current_page}')
+	page_count = page_count_for_document_id(document_id)
 	if page_count == 0:
 		print(f'the document has {page_count} pages, skipping this document')
 		return -1
@@ -246,7 +257,7 @@ def parse_document(t):
 	# for debugging with a small document
 	# page_count = 1
 
-	document = Document(document_uuid, document_name, page_count, document_latest_opening)
+	document = Document(document_uuid, document_name, page_count, document_latest_opening, current_page, rows, columns)
 
 	i = 0
 	for page in range(page_count):

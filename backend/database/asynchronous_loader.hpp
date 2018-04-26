@@ -8,6 +8,8 @@
 #include <atomic>
 #include <chrono>
 
+#include "constants.hpp"
+
 /*
   This file is the unlucky product of premature optimization.
   The creation of Pdf_page, Highlighting and Highlighting_component instances was extremely slow, but I made too few benchmarks and I erroneuosly tought that the problem was "new" being called too many times (I later solved the real problem).
@@ -56,7 +58,7 @@ template <class T> void ensure_only_one_is_instanciated()
     static bool first_instance = true;
     if(!first_instance) {
         std::cerr << "error: first_instance = " << first_instance << ", aborting.\n";
-        exit(1);
+        MY_ASSERT(false); exit(1);
     }
     first_instance = false;
 }
@@ -118,7 +120,7 @@ void Asynchronous_loader<T, buffer_size>::loader()
         bool b1 = this->loader_running_for_the_first_time;
         if(!((!b0 && b1) || (b0 && !b1))) {
             std::cerr << "error: this->loader_running = " << b0 << ", this->loader_running_for_the_first_time = " << b1 << ", aborting\n";
-            exit(1);
+            MY_ASSERT(false); exit(1);
         }
 
         //BUG: if get_element reaches the last element of a buffer (so it starts this thread), get_element() is called a lot of times before this thread finished (so even the other buffer is exhausted) and so get_element() tries to get again an element of the buffer modified in this call of loader(), then there will be a conflict in accessing the buffer. There is no need to fix this bug now since this class is unused
@@ -161,7 +163,7 @@ T * Asynchronous_loader<T, buffer_size>::get_element()
   
         if(current_element_in_buffer >= buffer_size) {
             // std::cerr << "info: current_element_in_buffer = " << current_element_in_buffer << ", aborting\n";
-            exit(1);
+            MY_ASSERT(false); exit(1);
         }
         
         T * element_to_return = this->buffers[(int)current_buffer][current_element_in_buffer];
