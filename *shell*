@@ -1,0 +1,25 @@
+bash-3.2$ make run
+error: acquired loader_running_mutex (loader), sizeof(T) = error: acquired loader_running_mutex (loader), sizeof(T) = error: acquired loader_running_mutex (loader), sizeof(T) = 80120112
+
+
+starting parsing json file
+finished parsing json file
+loading page i_page = 0
+loading page i_page = 10
+loading page i_page = 20
+loading page i_page = 30
+loading page i_page = 40
+loading page i_page = 50
+loading page i_page = 60
+loading page i_page = 70
+loading page i_page = 80
+error: acquired loader_running_mutex (loader), sizeof(T) = 80
+loading page i_page = 90
+giving pages ordering
+built the maps
+built the linked lists
+set the page ordering
+started loading the highlightings
+error: acquired loader_running_mutex (loader), sizeof(T) = 112
+finished loading the highlightings
+started loading the highlighting components

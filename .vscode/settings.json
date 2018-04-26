@@ -1,7 +1,9 @@
 {
     "files.associations": {
-        "list": "cpp"
+        "list": "cpp",
+        "chrono": "cpp"
     },
     "editor.wordWrap": "on",
-    "workbench.editor.showTabs": false
+    "workbench.editor.showTabs": false,
+    "C_Cpp.intelliSenseEngineFallback": "Disabled"
 }

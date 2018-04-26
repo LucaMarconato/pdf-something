@@ -8,14 +8,13 @@
             "name": "(lldb) Launch",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${workspaceFolder}/frontends/canonical/canonical-frontend",            
+            "program": "${workspaceRoot}/frontends/canonical/canonical-frontend",
             "args": [],
             "stopAtEntry": false,
-            "cwd": "${workspaceFolder}",
+            "cwd": "${workspaceFolder}/frontends/canonical",
             "environment": [],
-            "externalConsole": false,
+            "externalConsole": true,
             "MIMode": "lldb"
         }
-    ],
-    "console": "integratedTerminal",
+    ]
 }

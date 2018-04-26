@@ -1,0 +1,104 @@
+{
+    "windows":
+    [
+        {
+            "virtual_screen": "",
+            "monitor": "",
+            "fullscreen": "true",
+            "x0": 0,
+            "y0": 0,
+            "x1": 0,
+            "y1": 0,
+            "window_split_screen":
+            {
+                "number_of_rows": 1,
+                "number_of_columns": 2,
+                "window_split_screen_elements":
+                [
+                    {
+                        "document": "f9f2c8ce-1f40-4578-a193-2c9a57e8f0c6",
+                        "current_index": 41,
+                        "grid_layout": {
+                            "rows": 2,
+                            "columns": 4
+                        }
+                    },
+                    {
+                        "document": "21fe1c59-47a4-4ade-afd2-935c76fdec9b",
+                        "current_index": 1,
+                        "grid_layout": {
+                            "rows": 2,
+                            "columns": 4
+                        }
+                    }
+                ]
+            }
+        },
+        {
+            "virtual_screen": "",
+            "monitor": "",
+            "fullscreen": "false",
+            "x0": 0,
+            "y0": 0,
+            "x1": 1920,
+            "y1": 1080,
+            "window_split_screen":
+            {
+                "number_of_rows": 1,
+                "number_of_columns": 2,
+                "window_split_screen_elements":
+                [
+                    {
+                        "document": "42f0601e-b05b-4851-bfc5-e650ed17fd83",
+                        "current_index": 1,
+                        "grid_layout": {
+                            "rows": 3,
+                            "columns": 3
+                        }
+                    },
+                    {
+                        "document": "21fe1c59-47a4-4ade-afd2-935c76fdec9b",
+                        "current_index": 2,
+                        "grid_layout": {
+                            "rows": 2,
+                            "columns": 2
+                        }
+                    }
+                ]
+            }
+        },
+{
+            "virtual_screen": "",
+            "monitor": "",
+            "fullscreen": "false",
+            "x0": 0,
+            "y0": 0,
+            "x1": 1920,
+            "y1": 1080,
+            "window_split_screen":
+            {
+                "number_of_rows": 1,
+                "number_of_columns": 2,
+                "window_split_screen_elements":
+                [
+                    {
+                        "document": "d9e6f3c5-a12f-4086-8bc8-17df60fe5248",
+                        "current_index": 1,
+                        "grid_layout": {
+                            "rows": 3,
+                            "columns": 3
+                        }
+                    },
+                    {
+                        "document": "18ae30d9-d28b-4a1b-992f-ea8882b1dafb",
+                        "current_index": 2,
+                        "grid_layout": {
+                            "rows": 2,
+                            "columns": 2
+                        }
+                    }
+                ]
+            }
+        }
+    ]
+}
